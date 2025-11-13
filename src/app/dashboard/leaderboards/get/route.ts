@@ -10,35 +10,45 @@ export async function GET(request: NextRequest) {
     const type = searchParams.get('type') || 'wealth';
     const limit = Math.min(Number(searchParams.get('limit')) || 100, 100);
 
-    let query = supabase.from('users').select(
-      'id, username, prestige_level, total_prestiges, created_at'
-    );
+    // Get all users with their stats
+    const { data: users, error: usersError } = await supabase
+      .from('users')
+      .select('id, username, prestige_level')
+      .limit(limit);
 
-    // Join with player_stats for cash
-    const { data: allUsers, error } = await query.limit(limit);
+    if (usersError) throw usersError;
 
-    if (error) throw error;
+    if (!users || users.length === 0) {
+      return NextResponse.json({
+        success: true,
+        type,
+        leaderboard: [],
+      });
+    }
 
-    // Fetch stats for all users
-    const userIds = allUsers.map((u: any) => u.id);
+    // Get stats for all users
+    const userIds = users.map((u: any) => u.id);
     const { data: statsData, error: statsError } = await supabase
       .from('player_stats')
-      .select('user_id, cash, respect, level')
+      .select('user_id, cash, respect, level, tier')
       .in('user_id', userIds);
 
     if (statsError) throw statsError;
 
-    // Merge and sort
-    const enriched = allUsers.map((user: any) => {
-      const stats = statsData.find((s: any) => s.user_id === user.id);
+    // Merge data
+    const enriched = users.map((user: any) => {
+      const stats = statsData?.find((s: any) => s.user_id === user.id);
       return {
-        ...user,
+        username: user.username || 'Unknown',
+        prestigeLevel: user.prestige_level || 0,
+        level: stats?.level || 1,
         cash: stats?.cash || 0,
         respect: stats?.respect || 0,
-        level: stats?.level || 1,
+        tier: stats?.tier || 1,
       };
     });
 
+    // Sort by type
     let leaderboard = [];
 
     if (type === 'wealth') {
@@ -46,7 +56,7 @@ export async function GET(request: NextRequest) {
     } else if (type === 'respect') {
       leaderboard = enriched.sort((a: any, b: any) => b.respect - a.respect);
     } else if (type === 'prestige') {
-      leaderboard = enriched.sort((a: any, b: any) => b.prestige_level - a.prestige_level);
+      leaderboard = enriched.sort((a: any, b: any) => b.prestigeLevel - a.prestigeLevel);
     } else if (type === 'level') {
       leaderboard = enriched.sort((a: any, b: any) => b.level - a.level);
     }
@@ -55,8 +65,8 @@ export async function GET(request: NextRequest) {
     const withRank = leaderboard.map((user: any, idx: number) => ({
       rank: idx + 1,
       username: user.username,
-      value: type === 'wealth' ? user.cash : type === 'respect' ? user.respect : type === 'prestige' ? user.prestige_level : user.level,
-      prestigeLevel: user.prestige_level,
+      value: type === 'wealth' ? user.cash : type === 'respect' ? user.respect : type === 'prestige' ? user.prestigeLevel : user.level,
+      prestigeLevel: user.prestigeLevel,
       level: user.level,
       cash: user.cash,
       respect: user.respect,
