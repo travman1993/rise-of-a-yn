@@ -1,7 +1,367 @@
-[00:00:00.518] Server  LOG      ✓ Ready in 336ms
-[00:00:05.388] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:02:18.675] Server  LOG      ✓ Compiled in 10ms
-[00:02:40.484] Server  LOG      ✓ Compiled in 21ms
-[00:03:06.024] Server  LOG      ✓ Compiled in 12ms
-[00:05:48.744] Server  LOG      ✓ Compiled in 22ms
-[00:06:01.746] Server  LOG      ✓ Compiled in 13ms
+[00:00:00.556] Server  LOG      ✓ Ready in 355ms
+[00:00:01.931] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:04.967] Server  LOG      ✓ Compiled in 120ms
+[00:04:33.281] Server  ERROR    ⨯ ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:04:33.410] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:33.790] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:33.790] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:33.800] Server  ERROR    ⨯ ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:04:33.892] Browser ERROR   uncaughtError: Error: ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:04:34.038] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:34.038] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:39.805] Browser ERROR   uncaughtError: Error: ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:04:39.941] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:39.941] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:41.192] Browser ERROR   uncaughtError: Error: ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:04:41.328] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:41.328] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:50.552] Browser ERROR   uncaughtError: Error: ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:04:50.705] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:04:50.705] Browser ERROR   ./src/app/dashboard/minigames/page.tsx:10:1
+Module not found: Can't resolve './minigames.module.css'
+   8 | import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import styles from './minigames.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 |
+  12 | type GameType = 'bigbank' | 'dice' | 'shootout' | null;
+  13 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/minigames/page.tsx [Client Component Browser]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/minigames/page.tsx [Client Component SSR]
+    ./src/app/dashboard/minigames/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found

@@ -1,140 +1,340 @@
-// 📁 src/app/dashboard/leaderboards/page.tsx
-// Global Leaderboards - Wealth, Respect, Prestige, Level
+// 📁 src/app/dashboard/page.tsx
+// UPDATED - Main game dashboard with energy regen timer
 
 'use client';
 
-import { useState, useEffect } from 'react';
-import { getCurrentUser } from '@/lib/supabase';
-import { formatCash } from '@/lib/gameLogic';
-import styles from './leaderboards.module.css';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { getCurrentUser, getPlayerStats, updatePlayerStats, getBusinesses } from '@/lib/supabase';
+import { calculateLevel, formatCash } from '@/lib/gameLogic';
+import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
+import styles from './dashboard.module.css';
 
-type LeaderboardType = 'wealth' | 'respect' | 'prestige' | 'level';
-
-interface LeaderboardEntry {
-  rank: number;
-  username: string;
-  value: number;
-  prestigeLevel: number;
-  level: number;
-  cash: number;
-  respect: number;
-}
-
-export default function LeaderboardsPage() {
+export default function Dashboard() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
-  const [activeType, setActiveType] = useState<LeaderboardType>('wealth');
-  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [userRank, setUserRank] = useState<LeaderboardEntry | null>(null);
+  const [stats, setStats] = useState<any>(null);
+  const [businesses, setBusinesses] = useState<any[]>([]);
+  const [activeTab, setActiveTab] = useState('overview');
+  const [energyTimer, setEnergyTimer] = useState<string>('Full');
 
+  // LOAD PLAYER DATA
   useEffect(() => {
-    const load = async () => {
-      const currentUser = await getCurrentUser();
-      setUser(currentUser);
-    };
-    load();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      setLoading(true);
+    const loadData = async () => {
       try {
-        const res = await fetch(`/api/leaderboards?type=${activeType}&limit=100`);
-        const data = await res.json() as any;
-        setLeaderboard(data.leaderboard || []);
-
-        // Find user's rank
-        if (user) {
-          const userEntry = data.leaderboard?.find((entry: any) => entry.username === user.email?.split('@')[0]);
-          setUserRank(userEntry || null);
+        const currentUser = await getCurrentUser();
+        if (!currentUser) {
+          router.push('/');
+          return;
         }
+
+        const playerStats = await getPlayerStats(currentUser.id);
+        const playerBusinesses = await getBusinesses(currentUser.id);
+
+        setUser(currentUser);
+        setStats(playerStats);
+        setBusinesses(playerBusinesses);
       } catch (error) {
-        console.error('Leaderboard error:', error);
+        console.error('Load error:', error);
+        router.push('/');
       } finally {
         setLoading(false);
       }
     };
 
-    if (user) {
-      fetch();
+    loadData();
+  }, [router]);
+
+  // ENERGY TIMER - Updates every second
+  useEffect(() => {
+    if (!stats) return;
+
+    const interval = setInterval(() => {
+      const { newEnergy, timeUntilFull } = calculateEnergyRegen(
+        stats.last_energy_regen,
+        stats.max_energy,
+        stats.energy
+      );
+
+      setEnergyTimer(formatTimeRemaining(timeUntilFull));
+
+      // Auto-update stats if energy changed
+      if (newEnergy > stats.energy && newEnergy < stats.max_energy) {
+        setStats({ ...stats, energy: newEnergy });
+      } else if (newEnergy === stats.max_energy && stats.energy < stats.max_energy) {
+        setStats({ ...stats, energy: stats.max_energy });
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [stats]);
+
+  // HUSTLE - TAP TO EARN
+  const handleHustle = async () => {
+    if (!stats || stats.energy < 10) {
+      alert('Not enough energy! Restore: ' + energyTimer);
+      return;
     }
-  }, [activeType, user]);
 
-  const getValueDisplay = (entry: LeaderboardEntry) => {
-    if (activeType === 'wealth') return formatCash(entry.cash);
-    if (activeType === 'respect') return entry.respect.toLocaleString();
-    if (activeType === 'prestige') return entry.prestigeLevel;
-    return entry.level;
+    const hustleReward = Math.floor(stats.tier * 500);
+    const xpReward = Math.floor(stats.tier * 10);
+
+    try {
+      const updated = await updatePlayerStats(stats.user_id, {
+        cash: stats.cash + hustleReward,
+        xp: stats.xp + xpReward,
+        energy: stats.energy - 10,
+        last_energy_regen: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      });
+
+      setStats(updated);
+    } catch (error) {
+      console.error('Hustle error:', error);
+    }
   };
 
-  const getLabel = (type: LeaderboardType): string => {
-    const labels: Record<LeaderboardType, string> = {
-      wealth: '💰 NET WORTH',
-      respect: '🔥 RESPECT',
-      prestige: '💎 PRESTIGE',
-      level: '📈 LEVEL',
-    };
-    return labels[type];
+  // COLLECT FROM BUSINESSES
+  const handleCollectBusiness = async (businessId: string) => {
+    const business = businesses.find((b) => b.id === businessId);
+    if (!business) return;
+
+    const income = business.current_income || business.base_income;
+
+    try {
+      const updated = await updatePlayerStats(stats.user_id, {
+        cash: stats.cash + income,
+        updated_at: new Date().toISOString(),
+      });
+
+      setStats(updated);
+
+      // Update business last_collected
+      await fetch(`/api/businesses/${businessId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ last_collected: new Date().toISOString() }),
+      });
+
+      setBusinesses(
+        businesses.map((b) =>
+          b.id === businessId ? { ...b, last_collected: new Date().toISOString() } : b
+        )
+      );
+    } catch (error) {
+      console.error('Collect error:', error);
+    }
   };
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.loading}>
+          <div className={styles.spinner}></div>
+          <p>LOADING GAME...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const level = calculateLevel(stats?.xp || 0, businesses.length);
+  const nextLevelXP = Math.floor(250 * Math.pow(level + 1, 2) * (1 + (stats?.tier || 1) * 0.25));
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>🏆 LEADERBOARDS</h1>
-
-      {/* TABS */}
-      <div className={styles.tabs}>
-        {(['wealth', 'respect', 'prestige', 'level'] as LeaderboardType[]).map((type) => (
+      {/* HEADER */}
+      <header className={styles.header}>
+        <h1 className={styles.title}>
+          <span className="neon-text">RISE OF A YN</span>
+        </h1>
+        <div className={styles.userInfo}>
+          <span>{user?.email}</span>
           <button
-            key={type}
-            className={`${styles.tab} ${activeType === type ? styles.active : ''}`}
-            onClick={() => setActiveType(type)}
+            onClick={() => {
+              router.push('/');
+            }}
+            className={styles.logoutBtn}
           >
-            {getLabel(type)}
+            EXIT
           </button>
-        ))}
-      </div>
+        </div>
+      </header>
 
-      {/* USER RANK */}
-      {userRank && (
-        <div className={styles.userRank}>
-          <div className={styles.rankCard}>
-            <div className={styles.rankBadge}>#{userRank.rank}</div>
-            <div className={styles.rankInfo}>
-              <p className={styles.username}>👤 {userRank.username}</p>
-              <p className={styles.value}>{getValueDisplay(userRank)}</p>
-              <p className={styles.extra}>Level {userRank.level} • {userRank.prestigeLevel}x Prestige</p>
+      {/* MAIN LAYOUT */}
+      <div className={styles.main}>
+        {/* SIDEBAR */}
+        <aside className={styles.sidebar}>
+          <nav className={styles.nav}>
+            <button
+              className={`${styles.navBtn} ${activeTab === 'overview' ? styles.active : ''}`}
+              onClick={() => setActiveTab('overview')}
+            >
+              📊 OVERVIEW
+            </button>
+            <button
+              className={`${styles.navBtn} ${activeTab === 'hustle' ? styles.active : ''}`}
+              onClick={() => setActiveTab('hustle')}
+            >
+              💪 HUSTLE
+            </button>
+            <button
+              className={`${styles.navBtn} ${activeTab === 'businesses' ? styles.active : ''}`}
+              onClick={() => setActiveTab('businesses')}
+            >
+              🏢 BUSINESSES
+            </button>
+            <button
+              className={`${styles.navBtn} ${activeTab === 'shop' ? styles.active : ''}`}
+              onClick={() => setActiveTab('shop')}
+            >
+              🛍️ SHOP
+            </button>
+
+            {/* NEW SECTIONS */}
+            <Link href="/dashboard/minigames" className={styles.navBtn}>
+              🎲 GAMES
+            </Link>
+            <Link href="/dashboard/leaderboards" className={styles.navBtn}>
+              🏆 LEADERBOARDS
+            </Link>
+            <Link href="/dashboard/prestige" className={styles.navBtn}>
+              💎 PRESTIGE
+            </Link>
+          </nav>
+        </aside>
+
+        {/* CONTENT */}
+        <main className={styles.content}>
+          {/* STATS BAR */}
+          <div className={styles.statsBar}>
+            <div className={styles.stat}>
+              <span className={styles.label}>CASH</span>
+              <span className="neon-text">{formatCash(stats?.cash || 0)}</span>
+            </div>
+            <div className={styles.stat}>
+              <span className={styles.label}>LEVEL</span>
+              <span className="neon-text-cyan">{level}</span>
+            </div>
+            <div className={styles.stat}>
+              <span className={styles.label}>XP</span>
+              <span className="neon-text-purple">{stats?.xp || 0} / {nextLevelXP}</span>
+            </div>
+            <div className={styles.stat}>
+              <span className={styles.label}>RESPECT</span>
+              <span className="neon-text-pink">{stats?.respect || 0}</span>
+            </div>
+            <div className={styles.stat}>
+              <span className={styles.label}>TIER</span>
+              <span className="neon-text">{stats?.tier || 1}</span>
             </div>
           </div>
-        </div>
-      )}
 
-      {/* LEADERBOARD */}
-      <div className={styles.leaderboardWrapper}>
-        {loading ? (
-          <p className={styles.loading}>Loading leaderboard...</p>
-        ) : leaderboard.length === 0 ? (
-          <p className={styles.empty}>No entries yet</p>
-        ) : (
-          <div className={styles.leaderboard}>
-            {leaderboard.map((entry, idx) => (
-              <div key={idx} className={styles.row}>
-                <div className={styles.rank}>
-                  {entry.rank === 1 && '👑'}
-                  {entry.rank === 2 && '🥈'}
-                  {entry.rank === 3 && '🥉'}
-                  {entry.rank > 3 && `#${entry.rank}`}
+          {/* TABS CONTENT */}
+
+          {/* OVERVIEW TAB */}
+          {activeTab === 'overview' && (
+            <div className={styles.tabContent}>
+              <h2>GAME STATUS</h2>
+              <div className={styles.grid}>
+                <div className="card-gritty">
+                  <h3>📈 LEVEL</h3>
+                  <p className="neon-text" style={{ fontSize: '32px', margin: '10px 0' }}>
+                    {level}
+                  </p>
+                  <p style={{ color: '#a0aec0', fontSize: '12px' }}>
+                    {stats?.xp || 0} / {nextLevelXP} XP
+                  </p>
                 </div>
-                <div className={styles.name}>
-                  <p className={styles.username}>{entry.username}</p>
-                  <p className={styles.detail}>Lvl {entry.level} • {entry.prestigeLevel}x</p>
+
+                <div className="card-gritty">
+                  <h3>💰 NET WORTH</h3>
+                  <p className="neon-text" style={{ fontSize: '28px', margin: '10px 0' }}>
+                    {formatCash(stats?.cash || 0)}
+                  </p>
+                  <p style={{ color: '#a0aec0', fontSize: '12px' }}>Total wealth</p>
                 </div>
-                <div className={styles.value}>
-                  {getValueDisplay(entry)}
+
+                <div className="card-gritty">
+                  <h3>🏢 BUSINESSES</h3>
+                  <p className="neon-text-cyan" style={{ fontSize: '32px', margin: '10px 0' }}>
+                    {businesses.length}
+                  </p>
+                  <p style={{ color: '#a0aec0', fontSize: '12px' }}>Owned properties</p>
+                </div>
+
+                <div className="card-gritty">
+                  <h3>⚡ ENERGY</h3>
+                  <p className="neon-text-pink" style={{ fontSize: '32px', margin: '10px 0' }}>
+                    {stats?.energy || 0}
+                  </p>
+                  <p style={{ color: '#a0aec0', fontSize: '12px' }}>
+                    Full in: {energyTimer}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          )}
+
+          {/* HUSTLE TAB */}
+          {activeTab === 'hustle' && (
+            <div className={styles.tabContent}>
+              <h2>TAP TO EARN</h2>
+              <div className={styles.hustleSection}>
+                <button className={styles.hustleBtn} onClick={handleHustle} disabled={stats?.energy < 10}>
+                  <div className={styles.hustleEmoji}>💪</div>
+                  <div className={styles.hustleText}>
+                    <h3>GRIND IT</h3>
+                    <p>+{Math.floor(stats?.tier * 500)} CASH</p>
+                    <p>+{Math.floor(stats?.tier * 10)} XP</p>
+                  </div>
+                </button>
+                <p style={{ color: '#a0aec0', marginTop: '20px' }}>
+                  Energy: {stats?.energy} / {stats?.max_energy} ({energyTimer})
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* BUSINESSES TAB */}
+          {activeTab === 'businesses' && (
+            <div className={styles.tabContent}>
+              <h2>YOUR BUSINESSES</h2>
+              {businesses.length === 0 ? (
+                <p style={{ color: '#a0aec0' }}>No businesses yet. Come back later to unlock!</p>
+              ) : (
+                <div className={styles.grid}>
+                  {businesses.map((b) => (
+                    <div key={b.id} className="card-gritty">
+                      <h3>{b.name}</h3>
+                      <p style={{ color: '#ffed4e', fontSize: '18px', margin: '10px 0' }}>
+                        {formatCash(b.current_income || b.base_income)}/min
+                      </p>
+                      <p style={{ color: '#a0aec0', fontSize: '12px' }}>
+                        Manager: {b.manager_level} | Investor: {b.investor_level}
+                      </p>
+                      <button
+                        className="btn-grind"
+                        onClick={() => handleCollectBusiness(b.id)}
+                        style={{ marginTop: '10px', width: '100%' }}
+                      >
+                        COLLECT
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* SHOP TAB */}
+          {activeTab === 'shop' && (
+            <div className={styles.tabContent}>
+              <h2>SHOP</h2>
+              <p style={{ color: '#a0aec0' }}>Coming soon! Unlock after Tier 2.</p>
+            </div>
+          )}
+        </main>
       </div>
     </div>
   );

@@ -1,12 +1,14 @@
 // 📁 src/app/dashboard/page.tsx
-// Main game dashboard - WHERE THE GRIND HAPPENS
+// UPDATED - Main game dashboard with energy regen timer
 
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { getCurrentUser, getPlayerStats, updatePlayerStats, getBusinesses } from '@/lib/supabase';
 import { calculateLevel, formatCash } from '@/lib/gameLogic';
+import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
 import styles from './dashboard.module.css';
 
 export default function Dashboard() {
@@ -16,6 +18,7 @@ export default function Dashboard() {
   const [stats, setStats] = useState<any>(null);
   const [businesses, setBusinesses] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState('overview');
+  const [energyTimer, setEnergyTimer] = useState<string>('Full');
 
   // LOAD PLAYER DATA
   useEffect(() => {
@@ -44,10 +47,35 @@ export default function Dashboard() {
     loadData();
   }, [router]);
 
+  // ENERGY TIMER - Updates every second
+  useEffect(() => {
+    if (!stats) return;
+
+    const interval = setInterval(() => {
+      const lastRegen = stats.last_energy_regen || new Date().toISOString();
+      const { newEnergy, timeUntilFull } = calculateEnergyRegen(
+        lastRegen,
+        stats.max_energy,
+        stats.energy
+      );
+
+      setEnergyTimer(formatTimeRemaining(timeUntilFull));
+
+      // Auto-update stats if energy changed
+      if (newEnergy > stats.energy && newEnergy < stats.max_energy) {
+        setStats({ ...stats, energy: newEnergy });
+      } else if (newEnergy === stats.max_energy && stats.energy < stats.max_energy) {
+        setStats({ ...stats, energy: stats.max_energy });
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [stats]);
+
   // HUSTLE - TAP TO EARN
   const handleHustle = async () => {
     if (!stats || stats.energy < 10) {
-      alert('Not enough energy!');
+      alert('Not enough energy! Restore: ' + energyTimer);
       return;
     }
 
@@ -59,6 +87,7 @@ export default function Dashboard() {
         cash: stats.cash + hustleReward,
         xp: stats.xp + xpReward,
         energy: stats.energy - 10,
+        last_energy_regen: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       });
 
@@ -84,18 +113,16 @@ export default function Dashboard() {
       setStats(updated);
 
       // Update business last_collected
-      const businessUpdated = await fetch(`/api/businesses/${businessId}`, {
+      await fetch(`/api/businesses/${businessId}`, {
         method: 'PUT',
         body: JSON.stringify({ last_collected: new Date().toISOString() }),
       });
 
-      if (businessUpdated.ok) {
-        setBusinesses(
-          businesses.map((b) =>
-            b.id === businessId ? { ...b, last_collected: new Date().toISOString() } : b
-          )
-        );
-      }
+      setBusinesses(
+        businesses.map((b) =>
+          b.id === businessId ? { ...b, last_collected: new Date().toISOString() } : b
+        )
+      );
     } catch (error) {
       console.error('Collect error:', error);
     }
@@ -164,6 +191,17 @@ export default function Dashboard() {
             >
               🛍️ SHOP
             </button>
+
+            {/* NEW SECTIONS */}
+            <Link href="/dashboard/minigames" className={styles.navBtn}>
+              🎲 GAMES
+            </Link>
+            <Link href="/dashboard/leaderboards" className={styles.navBtn}>
+              🏆 LEADERBOARDS
+            </Link>
+            <Link href="/dashboard/prestige" className={styles.navBtn}>
+              💎 PRESTIGE
+            </Link>
           </nav>
         </aside>
 
@@ -231,7 +269,9 @@ export default function Dashboard() {
                   <p className="neon-text-pink" style={{ fontSize: '32px', margin: '10px 0' }}>
                     {stats?.energy || 0}
                   </p>
-                  <p style={{ color: '#a0aec0', fontSize: '12px' }}>Regenerates over time</p>
+                  <p style={{ color: '#a0aec0', fontSize: '12px' }}>
+                    Full in: {energyTimer}
+                  </p>
                 </div>
               </div>
             </div>
@@ -242,7 +282,7 @@ export default function Dashboard() {
             <div className={styles.tabContent}>
               <h2>TAP TO EARN</h2>
               <div className={styles.hustleSection}>
-                <button className={styles.hustleBtn} onClick={handleHustle}>
+                <button className={styles.hustleBtn} onClick={handleHustle} disabled={stats?.energy < 10}>
                   <div className={styles.hustleEmoji}>💪</div>
                   <div className={styles.hustleText}>
                     <h3>GRIND IT</h3>
@@ -251,7 +291,7 @@ export default function Dashboard() {
                   </div>
                 </button>
                 <p style={{ color: '#a0aec0', marginTop: '20px' }}>
-                  Energy: {stats?.energy} / {stats?.max_energy}
+                  Energy: {stats?.energy} / {stats?.max_energy} ({energyTimer})
                 </p>
               </div>
             </div>
