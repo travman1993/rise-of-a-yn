@@ -42,9 +42,6 @@ export default function LeaderboardsPage() {
       setLoading(true);
       try {
         const res = await fetch(`/api/leaderboards/get?type=${activeType}&limit=100`);
-        if (!res.ok) {
-          throw new Error(`API error: ${res.status}`);
-        }
         const data = (await res.json()) as { leaderboard: LeaderboardEntry[] };
         setLeaderboard(data.leaderboard || []);
 
