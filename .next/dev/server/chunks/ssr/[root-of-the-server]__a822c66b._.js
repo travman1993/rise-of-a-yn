@@ -45,11 +45,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
     throw e;
 })();
 var __TURBOPACK__imported__module__$5b$next$5d2f$internal$2f$font$2f$google$2f$space_mono_fdf5de47$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[next]/internal/font/google/space_mono_fdf5de47.js [app-rsc] (ecmascript)");
-(()=>{
-    const e = new Error("Cannot find module './globals.css'");
-    e.code = 'MODULE_NOT_FOUND';
-    throw e;
-})();
 ;
 ;
 ;
