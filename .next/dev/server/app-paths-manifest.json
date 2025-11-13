@@ -1,4 +1,7 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/games/shootout/route": "app/api/games/shootout/route.js",
+  "/dashboard/leaderboards/page": "app/dashboard/leaderboards/page.js",
   "/dashboard/minigames/page": "app/dashboard/minigames/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/page": "app/page.js"

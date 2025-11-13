@@ -365,3 +365,169 @@ Import traces:
     ./src/app/dashboard/minigames/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
+[00:10:08.821] Server  LOG      ✓ Compiled in 46ms
+[00:10:08.975] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:17.833] Server  ERROR    ⨯ Detected default export in '[project]/src/app/api/games/shootout/route.ts'. Export a named export for each HTTP method instead.
+[00:11:17.834] Server  ERROR    ⨯ No HTTP methods exported in '[project]/src/app/api/games/shootout/route.ts'. Export a named export for each HTTP method.
+[00:11:17.944] Browser ERROR   Shootout error: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:12:20.150] Browser ERROR   Shootout error: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:15:23.060] Server  LOG      ✓ Compiled in 20ms
+[00:15:34.719] Browser ERROR   Shootout error: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:15:39.498] Browser ERROR   Shootout error: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:16:08.245] Browser ERROR   Shootout error: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:17:54.914] Server  LOG     Shootout request: {}
+[00:18:15.144] Server  LOG     Shootout request: {}
+[00:22:29.553] Server  LOG      ✓ Compiled in 66ms
+[00:22:50.836] Server  LOG      ✓ Compiled in 9ms
+[00:23:26.146] Server  ERROR    ⨯ ./src/app/dashboard/leaderboards/page.tsx:12:1
+Module not found: Can't resolve './dashboard.module.css'
+  10 | import { calculateLevel, formatCash } from '@/lib/gameLogic';
+  11 | import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
+> 12 | import styles from './dashboard.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Dashboard() {
+  15 |   const router = useRouter();
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component Browser]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component SSR]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:23:26.174] Server  ERROR    ⨯ ./src/app/dashboard/leaderboards/page.tsx:12:1
+Module not found: Can't resolve './dashboard.module.css'
+  10 | import { calculateLevel, formatCash } from '@/lib/gameLogic';
+  11 | import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
+> 12 | import styles from './dashboard.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Dashboard() {
+  15 |   const router = useRouter();
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component Browser]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component SSR]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:23:26.260] Browser ERROR   uncaughtError: Error: ./src/app/dashboard/leaderboards/page.tsx:12:1
+Module not found: Can't resolve './dashboard.module.css'
+  10 | import { calculateLevel, formatCash } from '@/lib/gameLogic';
+  11 | import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
+> 12 | import styles from './dashboard.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Dashboard() {
+  15 |   const router = useRouter();
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component Browser]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component SSR]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:23:26.404] Browser ERROR   ./src/app/dashboard/leaderboards/page.tsx:12:1
+Module not found: Can't resolve './dashboard.module.css'
+  10 | import { calculateLevel, formatCash } from '@/lib/gameLogic';
+  11 | import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
+> 12 | import styles from './dashboard.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Dashboard() {
+  15 |   const router = useRouter();
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component Browser]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component SSR]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:23:26.404] Browser ERROR   ./src/app/dashboard/leaderboards/page.tsx:12:1
+Module not found: Can't resolve './dashboard.module.css'
+  10 | import { calculateLevel, formatCash } from '@/lib/gameLogic';
+  11 | import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
+> 12 | import styles from './dashboard.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Dashboard() {
+  15 |   const router = useRouter();
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component Browser]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component SSR]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:24:44.147] Browser ERROR   ./src/app/dashboard/leaderboards/page.tsx:12:1
+Module not found: Can't resolve './dashboard.module.css'
+  10 | import { calculateLevel, formatCash } from '@/lib/gameLogic';
+  11 | import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
+> 12 | import styles from './dashboard.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Dashboard() {
+  15 |   const router = useRouter();
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component Browser]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component SSR]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:25:46.147] Browser ERROR   ./src/app/dashboard/leaderboards/page.tsx:12:1
+Module not found: Can't resolve './dashboard.module.css'
+  10 | import { calculateLevel, formatCash } from '@/lib/gameLogic';
+  11 | import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
+> 12 | import styles from './dashboard.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Dashboard() {
+  15 |   const router = useRouter();
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component Browser]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/leaderboards/page.tsx [Client Component SSR]
+    ./src/app/dashboard/leaderboards/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
