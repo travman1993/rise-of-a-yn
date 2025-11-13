@@ -1,5 +1,1310 @@
-[00:00:00.573] Server  LOG      ✓ Ready in 369ms
-[00:00:02.297] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:02.946] Browser ERROR   Leaderboard error: {}
-[00:00:08.123] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:08.333] Browser ERROR   Leaderboard error: {}
+[00:00:00.789] Server  LOG      ✓ Ready in 572ms
+[00:00:19.485] Server  LOG      ○ Compiling /dashboard ...
+[00:00:29.610] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:41.083] Browser ERROR   Leaderboard error: {}
+[00:00:41.083] Browser ERROR   Leaderboard error: {}
+[00:00:42.477] Browser ERROR   Leaderboard error: {}
+[00:00:43.376] Browser ERROR   Leaderboard error: {}
+[00:00:44.193] Browser ERROR   Leaderboard error: {}
+[00:00:48.842] Server  ERROR    ⨯ ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+[00:00:48.992] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:48.992] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:48.992] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:48.993] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:48.993] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:48.993] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:48.993] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:48.993] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.307] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.324] Server  ERROR    ⨯ ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+
+./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+[00:00:49.416] Browser ERROR   uncaughtError: Error: ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export calculatePrestigeReset doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export calculatePrestigeReset was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export canPrestige doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export canPrestige was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeName doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeName was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+[00:00:49.568] Browser ERROR   ./src/app/dashboard/prestige/page.tsx:10:1
+Export getPrestigeState doesn't exist in target module
+   8 | import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
+   9 | import { formatCash } from '@/lib/gameLogic';
+> 10 | import { canPrestige, getPrestigeState, calculatePrestigeReset, getPrestigeName, describePrestige } from '@/lib/prestige';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { PRESTIGE_CONFIG } from '@/lib/types';
+  12 | import styles from './prestige.module.css';
+  13 |
+
+The export getPrestigeState was not found in module [project]/src/lib/prestige.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/prestige/page.tsx [Client Component Browser]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/prestige/page.tsx [Client Component SSR]
+    ./src/app/dashboard/prestige/page.tsx [Server Component]
