@@ -1,0 +1,228 @@
+/* 📁 src/app/dashboard/leaderboards/leaderboards.module.css */
+/* Leaderboards Page Styling */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #ffd700;
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+  
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #333333;
+  }
+  
+  .tab {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #b3b3b3;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .tab:hover {
+    color: #ffd700;
+    border-color: #ffd700;
+  }
+  
+  .tab.active {
+    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+    color: #000;
+    border-color: #ffd700;
+  }
+  
+  .userRank {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .rankCard {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.2);
+  }
+  
+  .rankBadge {
+    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+    color: #000;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  
+  .rankInfo {
+    flex: 1;
+  }
+  
+  .rankInfo p {
+    margin: 0;
+  }
+  
+  .username {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: #ffd700;
+    font-size: 14px;
+  }
+  
+  .value {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 4px 0;
+  }
+  
+  .extra {
+    color: #b3b3b3;
+    font-size: 11px;
+  }
+  
+  .leaderboardWrapper {
+    background: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .loading,
+  .empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #808080;
+    font-size: 14px;
+  }
+  
+  .leaderboard {
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  
+  .row {
+    display: grid;
+    grid-template-columns: 60px 1fr 120px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #333333;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .row:last-child {
+    border-bottom: none;
+  }
+  
+  .row:hover {
+    background: #242424;
+  }
+  
+  .rank {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+    color: #ffd700;
+  }
+  
+  .name {
+    flex: 1;
+  }
+  
+  .name p {
+    margin: 0;
+  }
+  
+  .detail {
+    color: #808080;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+  
+  .row .value {
+    text-align: right;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffd700;
+  }
+  
+  /* SCROLLBAR */
+  .leaderboard::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .leaderboard::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+  
+  .leaderboard::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 3px;
+  }
+  
+  .leaderboard::-webkit-scrollbar-thumb:hover {
+    background: #ffd700;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 12px;
+    }
+  
+    .tabs {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .rankCard {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .row {
+      grid-template-columns: 50px 1fr 100px;
+      padding: 10px;
+      font-size: 12px;
+    }
+  
+    .rank {
+      font-size: 16px;
+    }
+  }
