@@ -8,7 +8,7 @@ import '../styles/globals.css';
 const righteous = Righteous({
   variable: '--font-righteous',
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: '400',
 });
 
 const spaceMono = Space_Mono({
