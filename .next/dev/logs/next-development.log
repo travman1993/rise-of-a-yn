@@ -1,0 +1,204 @@
+[00:00:01.587] Server  LOG     It looks like you're trying to use TypeScript but do not have the required package(s) installed.
+Installing dependencies
+
+If you are not trying to use TypeScript, please remove the tsconfig.json file from your package root (and any TypeScript files in your app and pages directories).
+
+[00:00:01.644] Server  LOG     
+[00:00:01.645] Server  LOG     Installing devDependencies (npm):
+[00:00:01.645] Server  LOG     - typescript
+[00:00:01.645] Server  LOG     - @types/react
+[00:00:01.645] Server  LOG     
+[00:00:03.535] Server  LOG     
+[00:00:03.537] Server  LOG     
+[00:00:03.537] Server  LOG        We detected TypeScript in your project and created a tsconfig.json file for you.
+[00:00:03.626] Server  LOG      ✓ Ready in 3.4s
+[00:00:55.359] Server  ERROR    ⨯ ./src/app/layout.tsx:6:1
+Module not found: Can't resolve './globals.css'
+  4 | import type { Metadata } from 'next';
+  5 | import { Righteous, Space_Mono } from 'next/font/google';
+> 6 | import './globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | const righteous = Righteous({
+  9 |   variable: '--font-righteous',
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./src/app/page.tsx:8:1
+Module not found: Can't resolve '@/lib/supabase'
+   6 | import { useState } from 'react';
+   7 | import { useRouter } from 'next/navigation';
+>  8 | import { signUp, signIn } from '@/lib/supabase';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import styles from './page.module.css';
+  10 |
+  11 | export default function AuthPage() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./src/app/layout.tsx
+Module not found: Can't resolve 'next/font/google/target.css'
+Unknown weight 700 for font Righteous.
+
+Debug info:
+- Execution of <ModuleAssetContext as AssetContext>::resolve_asset failed
+- Execution of resolve failed
+- Execution of resolve_internal failed
+- Execution of NextFontGoogleReplacer::import_map_result failed
+- Execution of *get_font_css_properties failed
+- Execution of font_options_from_query_map failed
+- Unknown weight 700 for font Righteous.
+  Available weights: 400
+Error while looking up import map: Unknown weight 700 for font Righteous.
+
+Debug info:
+- Execution of NextFontGoogleReplacer::import_map_result failed
+- Execution of *get_font_css_properties failed
+- Execution of font_options_from_query_map failed
+- Unknown weight 700 for font Righteous.
+  Available weights: 400
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:55.933] Browser ERROR   uncaughtError: Error: ./src/app/layout.tsx:6:1
+Module not found: Can't resolve './globals.css'
+  4 | import type { Metadata } from 'next';
+  5 | import { Righteous, Space_Mono } from 'next/font/google';
+> 6 | import './globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | const righteous = Righteous({
+  9 |   variable: '--font-righteous',
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:56.098] Browser ERROR   ./src/app/layout.tsx:6:1
+Module not found: Can't resolve './globals.css'
+  4 | import type { Metadata } from 'next';
+  5 | import { Righteous, Space_Mono } from 'next/font/google';
+> 6 | import './globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | const righteous = Righteous({
+  9 |   variable: '--font-righteous',
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:56.098] Browser ERROR   ./src/app/page.tsx:8:1
+Module not found: Can't resolve '@/lib/supabase'
+   6 | import { useState } from 'react';
+   7 | import { useRouter } from 'next/navigation';
+>  8 | import { signUp, signIn } from '@/lib/supabase';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import styles from './page.module.css';
+  10 |
+  11 | export default function AuthPage() {
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:56.098] Browser ERROR   ./src/app/layout.tsx
+Module not found: Can't resolve 'next/font/google/target.css'
+Unknown weight 700 for font Righteous.
+
+Debug info:
+- Execution of <ModuleAssetContext as AssetContext>::resolve_asset failed
+- Execution of resolve failed
+- Execution of resolve_internal failed
+- Execution of NextFontGoogleReplacer::import_map_result failed
+- Execution of *get_font_css_properties failed
+- Execution of font_options_from_query_map failed
+- Unknown weight 700 for font Righteous.
+  Available weights: 400
+Error while looking up import map: Unknown weight 700 for font Righteous.
+
+Debug info:
+- Execution of NextFontGoogleReplacer::import_map_result failed
+- Execution of *get_font_css_properties failed
+- Execution of font_options_from_query_map failed
+- Unknown weight 700 for font Righteous.
+  Available weights: 400
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:56.438] Browser ERROR   ./src/app/layout.tsx:6:1
+Module not found: Can't resolve './globals.css'
+  4 | import type { Metadata } from 'next';
+  5 | import { Righteous, Space_Mono } from 'next/font/google';
+> 6 | import './globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | const righteous = Righteous({
+  9 |   variable: '--font-righteous',
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:56.438] Browser ERROR   ./src/app/page.tsx:8:1
+Module not found: Can't resolve '@/lib/supabase'
+   6 | import { useState } from 'react';
+   7 | import { useRouter } from 'next/navigation';
+>  8 | import { signUp, signIn } from '@/lib/supabase';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import styles from './page.module.css';
+  10 |
+  11 | export default function AuthPage() {
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:56.438] Browser ERROR   ./src/app/layout.tsx
+Module not found: Can't resolve 'next/font/google/target.css'
+Unknown weight 700 for font Righteous.
+
+Debug info:
+- Execution of <ModuleAssetContext as AssetContext>::resolve_asset failed
+- Execution of resolve failed
+- Execution of resolve_internal failed
+- Execution of NextFontGoogleReplacer::import_map_result failed
+- Execution of *get_font_css_properties failed
+- Execution of font_options_from_query_map failed
+- Unknown weight 700 for font Righteous.
+  Available weights: 400
+Error while looking up import map: Unknown weight 700 for font Righteous.
+
+Debug info:
+- Execution of NextFontGoogleReplacer::import_map_result failed
+- Execution of *get_font_css_properties failed
+- Execution of font_options_from_query_map failed
+- Unknown weight 700 for font Righteous.
+  Available weights: 400
+
+https://nextjs.org/docs/messages/module-not-found
