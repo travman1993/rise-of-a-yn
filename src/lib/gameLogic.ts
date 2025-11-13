@@ -28,10 +28,12 @@ import {
     cosmetics: number = 0,
     prestiges: number = 0
   ): number {
-    const basepower = cash * 0.8 + respect * 100;
-    const cosmeticBonus = cosmetics * 5;
-    const prestigeBonus = prestiges * (prestiges * 0.02);
-    return Math.floor(basepower + cosmeticBonus + prestigeBonus);
+    // Much stricter formula for boss fights
+    const basePower = cash * 0.1 + respect * 50; // Cash is now 10x harder (was 0.8)
+    const cosmeticBonus = cosmetics * 2; // Reduced from 5
+    const prestigeBonus = prestiges * (prestiges * 0.01); // Reduced from 0.02
+    
+    return Math.floor(basePower + cosmeticBonus + prestigeBonus);
   }
   
   // COST CALCULATION WITH INFLATION

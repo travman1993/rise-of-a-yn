@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { getCurrentUser, getPlayerStats, updatePlayerStats, getBusinesses } from '@/lib/supabase';
 import { calculateLevel, formatCash } from '@/lib/gameLogic';
 import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
+import { useEnergyRegen } from '@/lib/useEnergyRegen';
 import styles from './dashboard.module.css';
 
 export default function Dashboard() {
@@ -47,26 +48,24 @@ export default function Dashboard() {
     loadData();
   }, [router]);
 
-  // ENERGY TIMER - Updates every second
+  // USE ENERGY REGEN HOOK - Auto-updates energy every 60 seconds
+  useEnergyRegen(user?.id, stats, (newEnergy) => {
+    setStats((prev: any) => ({ ...prev, energy: newEnergy }));
+  });
+
+  // ENERGY TIMER - Updates display every second
   useEffect(() => {
     if (!stats) return;
 
     const interval = setInterval(() => {
       const lastRegen = stats.last_energy_regen || new Date().toISOString();
-      const { newEnergy, timeUntilFull } = calculateEnergyRegen(
+      const { timeUntilFull } = calculateEnergyRegen(
         lastRegen,
         stats.max_energy,
         stats.energy
       );
 
       setEnergyTimer(formatTimeRemaining(timeUntilFull));
-
-      // Auto-update stats if energy changed
-      if (newEnergy > stats.energy && newEnergy < stats.max_energy) {
-        setStats({ ...stats, energy: newEnergy });
-      } else if (newEnergy === stats.max_energy && stats.energy < stats.max_energy) {
-        setStats({ ...stats, energy: stats.max_energy });
-      }
     }, 1000);
 
     return () => clearInterval(interval);
@@ -179,28 +178,26 @@ export default function Dashboard() {
             >
               💪 HUSTLE
             </button>
-            <button
-              className={`${styles.navBtn} ${activeTab === 'businesses' ? styles.active : ''}`}
-              onClick={() => setActiveTab('businesses')}
-            >
+            <Link href="/dashboard/businesses" className={styles.navBtn}>
               🏢 BUSINESSES
-            </button>
-            <button
-              className={`${styles.navBtn} ${activeTab === 'shop' ? styles.active : ''}`}
-              onClick={() => setActiveTab('shop')}
-            >
+            </Link>
+            <Link href="/dashboard/shop" className={styles.navBtn}>
               🛍️ SHOP
-            </button>
-
-            {/* NEW SECTIONS */}
+            </Link>
             <Link href="/dashboard/minigames" className={styles.navBtn}>
               🎲 GAMES
             </Link>
             <Link href="/dashboard/leaderboards" className={styles.navBtn}>
               🏆 LEADERBOARDS
             </Link>
+            <Link href="/dashboard/crews" className={styles.navBtn}>
+              👥 CREWS
+            </Link>
             <Link href="/dashboard/prestige" className={styles.navBtn}>
               💎 PRESTIGE
+            </Link>
+            <Link href="/dashboard/boss" className={styles.navBtn}>
+              🔫 BOSS
             </Link>
           </nav>
         </aside>

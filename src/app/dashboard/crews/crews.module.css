@@ -1,0 +1,341 @@
+/* 📁 src/app/dashboard/crews/crews.module.css */
+/* Crews System Styling */
+
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #050505 0%, #0a0a0a 100%);
+    background-attachment: fixed;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #ffd700;
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+  
+  .backBtn {
+    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+    color: #000;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 11px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  
+  .backBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  }
+  
+  /* IN CREW VIEW */
+  .crewView {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .crewCard {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.2);
+  }
+  
+  .crewHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    padding-bottom: 16px;
+  }
+  
+  .crewName {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #ffd700;
+    margin: 0;
+  }
+  
+  .crewTag {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  .crewBadge {
+    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+    color: #000;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+  
+  .crewStats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+  }
+  
+  .stat {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .label {
+    display: block;
+    color: #b3b3b3;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  
+  .value {
+    display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: #ffffff;
+  }
+  
+  .crewInfo {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  
+  .crewInfo p {
+    margin: 8px 0;
+    color: #b3b3b3;
+    font-size: 12px;
+  }
+  
+  .leaveBtn {
+    background: #ff4444;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 12px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  
+  .leaveBtn:hover:not(:disabled) {
+    background: #ff2222;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 34, 34, 0.3);
+  }
+  
+  .leaveBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* NO CREW VIEW */
+  .noCrewView {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .emptyState {
+    background: #1a1a1a;
+    border: 2px dashed #333333;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .emptyIcon {
+    font-size: 48px;
+    margin: 0 0 12px;
+  }
+  
+  .emptyText {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 4px;
+  }
+  
+  .emptySubtext {
+    color: #b3b3b3;
+    font-size: 12px;
+    margin: 0;
+  }
+  
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .actionBtn {
+    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+    color: #000;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  
+  .actionBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  }
+  
+  /* FORM PANEL */
+  .formPanel {
+    background: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  
+  .formPanel h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: #ffd700;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  
+  .formGroup label {
+    color: #ffd700;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  .formGroup input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333333;
+    color: #ffffff;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+  }
+  
+  .formGroup input:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+  }
+  
+  .submitBtn {
+    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  
+  .submitBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  }
+  
+  .submitBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* JOIN PANEL */
+  .joinPanel {
+    background: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .comingSoon {
+    color: #b3b3b3;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 12px;
+      max-width: 100%;
+    }
+  
+    .crewStats {
+      grid-template-columns: 1fr;
+    }
+  
+    .actions {
+      grid-template-columns: 1fr;
+    }
+  
+    .emptyState {
+      padding: 30px 20px;
+    }
+  }
