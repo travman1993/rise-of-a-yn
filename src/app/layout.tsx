@@ -3,7 +3,7 @@
 
 import type { Metadata } from 'next';
 import { Righteous, Space_Mono } from 'next/font/google';
-import './globals.css';
+import '../styles/globals.css';
 
 const righteous = Righteous({
   variable: '--font-righteous',
