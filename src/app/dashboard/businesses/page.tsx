@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
 import { formatCash, calculateManagerCost, calculateInvestorCost } from '@/lib/gameLogic';
+import { BUSINESSES } from '@/lib/tierData';
 import styles from './businesses.module.css';
 
 interface Business {
@@ -23,39 +24,6 @@ interface Business {
   last_collected: string;
   image_url: string;
 }
-
-const BUSINESS_TEMPLATES = {
-  1: [
-    { name: '💧 Water Boy Crew', tier: 1 },
-    { name: '👢 Boot Removal', tier: 1 },
-    { name: '👟 Sneaker Flip', tier: 1 },
-    { name: '🎤 Studio Shares', tier: 1 },
-  ],
-  2: [
-    { name: '🏚️ Trap House', tier: 2 },
-    { name: '🚗 Car Wash', tier: 2 },
-    { name: '🍔 Food Truck', tier: 2 },
-    { name: '🥃 Liquor Store', tier: 2 },
-  ],
-  3: [
-    { name: '🏎️ Car Dealership', tier: 3 },
-    { name: '🏢 Real Estate', tier: 3 },
-    { name: '🍾 Nightclub', tier: 3 },
-    { name: '💿 Record Label', tier: 3 },
-  ],
-  4: [
-    { name: '📦 Import Co.', tier: 4 },
-    { name: '🚚 Logistics Fleet', tier: 4 },
-    { name: '✈️ Jet Lease', tier: 4 },
-    { name: '💻 Tech Startup', tier: 4 },
-  ],
-  5: [
-    { name: '🛢️ Oil Field', tier: 5 },
-    { name: '💨 Wind Farm', tier: 5 },
-    { name: '⛴️ Cruise Line', tier: 5 },
-    { name: '🌊 Overseas Port', tier: 5 },
-  ],
-};
 
 const TIER_COSTS = {
   1: 10000,
@@ -104,9 +72,13 @@ export default function BusinessesPage() {
     setLoading(true);
     try {
       const res = await fetch('/api/businesses', {
-        method: 'PUT',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ businessId, userId: user.id }),
+        body: JSON.stringify({
+          action: 'collect',
+          businessId,
+          userId: user.id,
+        }),
       });
 
       const data = await res.json();
@@ -118,9 +90,12 @@ export default function BusinessesPage() {
           )
         );
         alert(`+${formatCash(data.income)}`);
+      } else {
+        alert(data.error || 'Failed to collect');
       }
     } catch (error) {
       console.error('Collect error:', error);
+      alert('Collect error');
     } finally {
       setLoading(false);
     }
@@ -145,7 +120,7 @@ export default function BusinessesPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          action: 'hire_manager',
+          action: 'buy_speed_manager',
           userId: user.id,
           businessId,
         }),
@@ -155,7 +130,7 @@ export default function BusinessesPage() {
       if (data.success) {
         setStats({ ...stats, cash: data.newCash });
         loadBusinesses(user.id);
-        alert(data.message);
+        alert('Speed Manager hired!');
       } else {
         alert(data.error);
       }
@@ -186,7 +161,7 @@ export default function BusinessesPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          action: 'hire_investor',
+          action: 'buy_income_manager',
           userId: user.id,
           businessId,
         }),
@@ -196,22 +171,22 @@ export default function BusinessesPage() {
       if (data.success) {
         setStats({ ...stats, cash: data.newCash });
         loadBusinesses(user.id);
-        alert(data.message);
+        alert('Income Manager hired!');
       } else {
         alert(data.error);
       }
     } catch (error) {
       console.error('Hire investor error:', error);
-      alert('Failed to hire investor');
+      alert('Failed to hire income manager');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleBuyBusiness = async (template: any) => {
+  const handleBuyBusiness = async (businessTemplate: any) => {
     if (!user || !stats) return;
 
-    const cost = TIER_COSTS[template.tier as keyof typeof TIER_COSTS];
+    const cost = businessTemplate.baseCost;
 
     if (stats.cash < cost) {
       alert('Not enough cash!');
@@ -226,8 +201,8 @@ export default function BusinessesPage() {
         body: JSON.stringify({
           action: 'buy',
           userId: user.id,
-          tier: template.tier,
-          name: template.name,
+          tier: businessTemplate.tier,
+          businessData: businessTemplate,
         }),
       });
 
@@ -290,11 +265,11 @@ export default function BusinessesPage() {
                       <span className={styles.value}>{formatCash(biz.current_income)}/min</span>
                     </div>
                     <div className={styles.stat}>
-                      <span className={styles.label}>Mgr</span>
+                      <span className={styles.label}>Speed Mgr</span>
                       <span className={styles.value}>L{biz.manager_level}</span>
                     </div>
                     <div className={styles.stat}>
-                      <span className={styles.label}>Inv</span>
+                      <span className={styles.label}>Income Mgr</span>
                       <span className={styles.value}>L{biz.investor_level}</span>
                     </div>
                   </div>
@@ -309,7 +284,7 @@ export default function BusinessesPage() {
                       className={styles.upgradeBtn}
                       title={`Cost: ${formatCash(calculateManagerCost(biz.tier, biz.manager_level))}`}
                     >
-                      👔
+                      ⚡
                     </button>
                     <button
                       onClick={() => handleHireInvestor(biz.id)}
@@ -317,7 +292,7 @@ export default function BusinessesPage() {
                       className={styles.upgradeBtn}
                       title={`Cost: ${formatCash(calculateInvestorCost(biz.tier, biz.investor_level))}`}
                     >
-                      💎
+                      💵
                     </button>
                   </div>
                 </div>
@@ -342,16 +317,16 @@ export default function BusinessesPage() {
                   <h3 className={styles.tierTitle}>Tier {tier}</h3>
                   <p className={styles.tierPrice}>{formatCash(TIER_COSTS[tier as keyof typeof TIER_COSTS])}</p>
                   <div className={styles.tierBusinesses}>
-                    {BUSINESS_TEMPLATES[tier as keyof typeof BUSINESS_TEMPLATES].map((template, idx) => (
+                    {(BUSINESSES[tier as keyof typeof BUSINESSES] || []).map((template: any) => (
                       <button
-                        key={idx}
+                        key={template.id}
                         onClick={() => handleBuyBusiness(template)}
                         disabled={
-                          loading || stats.cash < TIER_COSTS[tier as keyof typeof TIER_COSTS]
+                          loading || stats.cash < template.baseCost
                         }
                         className={styles.buyBusinessBtn}
                       >
-                        {template.name}
+                        {template.icon} {template.name}
                       </button>
                     ))}
                   </div>

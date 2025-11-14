@@ -1,9 +1,8 @@
 // 📁 src/app/api/businesses/route.ts
-// Businesses Management API
+// Businesses Management API - Direct implementation
 
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
-import { calculateCost, calculateIncome, calculateManagerCost, calculateInvestorCost } from '@/lib/gameLogic';
 
 // GET - Fetch user's businesses
 export async function GET(request: NextRequest) {
@@ -33,10 +32,11 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST - Buy business or hire manager/investor
+// POST - Buy business
 export async function POST(request: NextRequest) {
   try {
-    const { action, userId, businessId, tier, name } = await request.json();
+    const body = await request.json();
+    const { action, userId, businessId, tier, businessData } = body;
 
     if (!userId) {
       return NextResponse.json({ error: 'Missing userId' }, { status: 400 });
@@ -51,9 +51,10 @@ export async function POST(request: NextRequest) {
 
     if (statsError) throw statsError;
 
+    // ACTION: BUY BUSINESS
     if (action === 'buy') {
-      if (!tier || !name) {
-        return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+      if (!tier || !businessData) {
+        return NextResponse.json({ error: 'Missing tier or businessData' }, { status: 400 });
       }
 
       // Check tier access
@@ -61,10 +62,23 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Unlock this tier first' }, { status: 400 });
       }
 
-      const cost = calculateCost(10000, tier, false, false, 1);
+      // businessData contains: { id, name, icon, baseIncome, baseCost, baseSpeed }
+      const cost = businessData.baseCost;
 
       if (stats.cash < cost) {
         return NextResponse.json({ error: 'Insufficient cash' }, { status: 400 });
+      }
+
+      // Check if already owns this business
+      const { data: existing } = await supabase
+        .from('businesses')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('name', businessData.name)
+        .single();
+
+      if (existing) {
+        return NextResponse.json({ error: 'You already own this business' }, { status: 400 });
       }
 
       // Create business
@@ -73,17 +87,16 @@ export async function POST(request: NextRequest) {
         .insert([
           {
             user_id: userId,
-            name,
-            tier,
-            base_income: 50 * Math.pow(5, tier - 1),
-            current_income: 50 * Math.pow(5, tier - 1),
-            level: 1,
-            manager_level: 0,
-            investor_level: 0,
-            manager_name: '',
-            investor_name: '',
+            name: businessData.name,
+            icon: businessData.icon,
+            tier: tier,
+            base_income: businessData.baseIncome,
+            current_income: businessData.baseIncome,
+            base_speed: businessData.baseSpeed,
+            upgrade_level: 0,
+            speed_manager_level: 0,
+            income_manager_level: 0,
             last_collected: new Date().toISOString(),
-            image_url: '🏢',
           },
         ])
         .select()
@@ -104,50 +117,157 @@ export async function POST(request: NextRequest) {
         success: true,
         business: newBusiness,
         newCash: stats.cash - cost,
-        message: `Bought ${name}!`,
+        message: `Bought ${businessData.name}!`,
       });
     }
 
-    if (action === 'hire_manager') {
+    // ACTION: COLLECT FROM BUSINESS
+    if (action === 'collect') {
       if (!businessId) {
         return NextResponse.json({ error: 'Missing businessId' }, { status: 400 });
       }
 
-      // Get business
-      const { data: business, error: bizError } = await supabase
+      const { data: business } = await supabase
         .from('businesses')
         .select('*')
         .eq('id', businessId)
         .eq('user_id', userId)
         .single();
 
-      if (bizError) throw bizError;
+      if (!business) {
+        return NextResponse.json({ error: 'Business not found' }, { status: 400 });
+      }
 
-      const managerCost = calculateManagerCost(business.tier, business.manager_level);
+      // Calculate current income
+      let income = business.base_income * Math.pow(2, business.upgrade_level);
+      let managerBonus = 1 + (business.income_manager_level * 0.2);
+      const currentIncome = Math.floor(income * managerBonus);
+
+      // Calculate current speed
+      let speed = business.base_speed / Math.pow(2, business.upgrade_level);
+      if (business.speed_manager_level > 0) {
+        speed = speed / business.speed_manager_level;
+      }
+      const currentSpeed = Math.max(5, speed);
+
+      // Check if ready
+      const now = new Date();
+      const lastCollected = new Date(business.last_collected);
+      const secondsPassed = (now.getTime() - lastCollected.getTime()) / 1000;
+
+      if (secondsPassed < currentSpeed) {
+        const timeRemaining = Math.max(0, currentSpeed - secondsPassed);
+        return NextResponse.json({
+          error: 'Not ready to collect',
+          timeRemaining,
+        }, { status: 400 });
+      }
+
+      // Get player stats
+      const { data: playerStats } = await supabase
+        .from('player_stats')
+        .select('cash')
+        .eq('user_id', userId)
+        .single();
+
+      // Add income
+      await supabase
+        .from('player_stats')
+        .update({
+          cash: playerStats.cash + currentIncome,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('user_id', userId);
+
+      // Update last_collected
+      await supabase
+        .from('businesses')
+        .update({
+          last_collected: new Date().toISOString(),
+        })
+        .eq('id', businessId);
+
+      return NextResponse.json({
+        success: true,
+        income: currentIncome,
+        newCash: playerStats.cash + currentIncome,
+      });
+    }
+
+    // ACTION: UPGRADE
+    if (action === 'upgrade') {
+      if (!businessId) {
+        return NextResponse.json({ error: 'Missing businessId' }, { status: 400 });
+      }
+
+      const { data: business } = await supabase
+        .from('businesses')
+        .select('*')
+        .eq('id', businessId)
+        .eq('user_id', userId)
+        .single();
+
+      const upgradeCost = Math.floor(business.base_income * 1.5 * Math.pow(1.5, business.upgrade_level));
+
+      if (stats.cash < upgradeCost) {
+        return NextResponse.json({ error: 'Insufficient cash' }, { status: 400 });
+      }
+
+      const newUpgradeLevel = business.upgrade_level + 1;
+      let newIncome = business.base_income * Math.pow(2, newUpgradeLevel);
+      let managerBonus = 1 + (business.income_manager_level * 0.2);
+      const currentIncome = Math.floor(newIncome * managerBonus);
+
+      await supabase
+        .from('businesses')
+        .update({
+          upgrade_level: newUpgradeLevel,
+          current_income: currentIncome,
+        })
+        .eq('id', businessId);
+
+      await supabase
+        .from('player_stats')
+        .update({
+          cash: stats.cash - upgradeCost,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('user_id', userId);
+
+      return NextResponse.json({
+        success: true,
+        newCash: stats.cash - upgradeCost,
+        message: `Upgraded!`,
+      });
+    }
+
+    // ACTION: BUY SPEED MANAGER
+    if (action === 'buy_speed_manager') {
+      if (!businessId) {
+        return NextResponse.json({ error: 'Missing businessId' }, { status: 400 });
+      }
+
+      const { data: business } = await supabase
+        .from('businesses')
+        .select('*')
+        .eq('id', businessId)
+        .eq('user_id', userId)
+        .single();
+
+      const tierBaseCost = 5000 * Math.pow(10, business.tier - 1);
+      const managerCost = Math.floor(tierBaseCost * Math.pow(2, business.speed_manager_level));
 
       if (stats.cash < managerCost) {
         return NextResponse.json({ error: 'Insufficient cash' }, { status: 400 });
       }
 
-      const newManagerLevel = business.manager_level + 1;
-      const newIncome = calculateIncome(
-        business.base_income,
-        newManagerLevel,
-        business.investor_level,
-        business.tier
-      );
-
-      // Update business
       await supabase
         .from('businesses')
         .update({
-          manager_level: newManagerLevel,
-          current_income: newIncome,
-          updated_at: new Date().toISOString(),
+          speed_manager_level: business.speed_manager_level + 1,
         })
         .eq('id', businessId);
 
-      // Deduct cash
       await supabase
         .from('player_stats')
         .update({
@@ -158,130 +278,60 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({
         success: true,
-        message: `Hired manager level ${newManagerLevel}!`,
         newCash: stats.cash - managerCost,
-        newIncome,
       });
     }
 
-    if (action === 'hire_investor') {
+    // ACTION: BUY INCOME MANAGER
+    if (action === 'buy_income_manager') {
       if (!businessId) {
         return NextResponse.json({ error: 'Missing businessId' }, { status: 400 });
       }
 
-      // Get business
-      const { data: business, error: bizError } = await supabase
+      const { data: business } = await supabase
         .from('businesses')
         .select('*')
         .eq('id', businessId)
         .eq('user_id', userId)
         .single();
 
-      if (bizError) throw bizError;
+      const tierBaseCost = 5000 * Math.pow(10, business.tier - 1);
+      const managerCost = Math.floor(tierBaseCost * Math.pow(2, business.income_manager_level));
 
-      const investorCost = calculateInvestorCost(business.tier, business.investor_level);
-
-      if (stats.cash < investorCost) {
+      if (stats.cash < managerCost) {
         return NextResponse.json({ error: 'Insufficient cash' }, { status: 400 });
       }
 
-      const newInvestorLevel = business.investor_level + 1;
-      const newIncome = calculateIncome(
-        business.base_income,
-        business.manager_level,
-        newInvestorLevel,
-        business.tier
-      );
+      const newManagerLevel = business.income_manager_level + 1;
+      let newIncome = business.base_income * Math.pow(2, business.upgrade_level);
+      let managerBonus = 1 + (newManagerLevel * 0.2);
+      const currentIncome = Math.floor(newIncome * managerBonus);
 
-      // Update business
       await supabase
         .from('businesses')
         .update({
-          investor_level: newInvestorLevel,
-          current_income: newIncome,
-          updated_at: new Date().toISOString(),
+          income_manager_level: newManagerLevel,
+          current_income: currentIncome,
         })
         .eq('id', businessId);
 
-      // Deduct cash
       await supabase
         .from('player_stats')
         .update({
-          cash: stats.cash - investorCost,
+          cash: stats.cash - managerCost,
           updated_at: new Date().toISOString(),
         })
         .eq('user_id', userId);
 
       return NextResponse.json({
         success: true,
-        message: `Hired investor level ${newInvestorLevel}!`,
-        newCash: stats.cash - investorCost,
-        newIncome,
+        newCash: stats.cash - managerCost,
       });
     }
 
     return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
   } catch (error: any) {
     console.error('Businesses POST error:', error);
-    return NextResponse.json({ error: error.message }, { status: 400 });
-  }
-}
-
-// PUT - Collect income from business
-export async function PUT(request: NextRequest) {
-  try {
-    const { businessId, userId } = await request.json();
-
-    if (!businessId || !userId) {
-      return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
-    }
-
-    // Get business
-    const { data: business, error: bizError } = await supabase
-      .from('businesses')
-      .select('*')
-      .eq('id', businessId)
-      .eq('user_id', userId)
-      .single();
-
-    if (bizError) throw bizError;
-
-    // Get player stats
-    const { data: stats, error: statsError } = await supabase
-      .from('player_stats')
-      .select('cash')
-      .eq('user_id', userId)
-      .single();
-
-    if (statsError) throw statsError;
-
-    const income = business.current_income || business.base_income;
-
-    // Add income to cash
-    await supabase
-      .from('player_stats')
-      .update({
-        cash: stats.cash + income,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('user_id', userId);
-
-    // Update business last_collected
-    await supabase
-      .from('businesses')
-      .update({
-        last_collected: new Date().toISOString(),
-      })
-      .eq('id', businessId);
-
-    return NextResponse.json({
-      success: true,
-      income,
-      newCash: stats.cash + income,
-      message: `Collected ${income}!`,
-    });
-  } catch (error: any) {
-    console.error('Businesses PUT error:', error);
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }

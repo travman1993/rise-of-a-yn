@@ -1,92 +1,124 @@
 // 📁 src/lib/useEnergyRegen.ts
 // Custom hook for real-time energy regeneration - Syncs with DB
+// FIXED: Prevent constant resets, proper time tracking, safety bounds for negative energy
 
 import { useEffect, useRef } from 'react';
 import { supabase } from './supabase';
-import { calculateEnergyRegen } from './energy';
 
 export function useEnergyRegen(
   userId: string | undefined,
   stats: any,
   onEnergyUpdate: (newEnergy: number) => void
 ) {
-  const lastSyncRef = useRef<number>(0);
+  const lastRegenTimeRef = useRef<number>(0);
   const lastEnergyRef = useRef<number>(0);
   const isInitializedRef = useRef<boolean>(false);
 
-  // INITIALIZE ON MOUNT - Get real time from DB
+  // INITIALIZE ONLY ONCE - Store server time reference
   useEffect(() => {
     if (!stats || isInitializedRef.current) return;
 
-    const lastRegenTime = stats.last_energy_regen 
+    // Clamp energy to valid range immediately (FIX: prevents negative energy bug)
+    const clampedEnergy = Math.max(0, Math.min(stats.energy || 0, stats.max_energy || 100));
+
+    // Parse the server's last_energy_regen timestamp
+    const serverTime = stats.last_energy_regen 
       ? new Date(stats.last_energy_regen).getTime() 
       : Date.now();
 
-    lastSyncRef.current = lastRegenTime;
-    lastEnergyRef.current = Math.min(stats.energy, stats.max_energy);
+    // Store the server time when we initialized
+    lastRegenTimeRef.current = serverTime;
+    lastEnergyRef.current = clampedEnergy;
     isInitializedRef.current = true;
-  }, [stats]);
 
-  // DISPLAY UPDATE - Every 1 second
+    console.log('Energy system initialized:', {
+      rawEnergy: stats.energy,
+      clampedEnergy: clampedEnergy,
+      maxEnergy: stats.max_energy,
+      lastRegenTime: new Date(serverTime).toISOString(),
+    });
+  }, [stats]); // Watch stats for initial load, guard prevents re-runs
+
+  // DISPLAY UPDATE - Every 1 second (client-side only, no DB calls)
   useEffect(() => {
     if (!stats || !isInitializedRef.current) return;
 
     const displayInterval = setInterval(() => {
       const now = Date.now();
-      const secondsPassed = (now - lastSyncRef.current) / 1000;
+      const millisecondsPassed = now - lastRegenTimeRef.current;
+      const secondsPassed = millisecondsPassed / 1000;
       
-      // 1 energy per 60 seconds
+      // 1 energy per 60 seconds (60 seconds = 1 energy)
       const energyRestored = Math.floor(secondsPassed / 60);
       const newEnergy = Math.max(0, Math.min(
         lastEnergyRef.current + energyRestored,
-        stats.max_energy
+        stats.max_energy || 100
       ));
 
-      onEnergyUpdate(newEnergy);
+      // Safety check: only update if within valid range
+      if (newEnergy >= 0 && newEnergy <= (stats.max_energy || 100)) {
+        onEnergyUpdate(newEnergy);
+      }
     }, 1000);
 
     return () => clearInterval(displayInterval);
-  }, [stats, onEnergyUpdate]);
+  }, [stats?.max_energy, onEnergyUpdate]); // Only depend on max_energy changes
 
-  // DATABASE SYNC - Every 60 seconds
+  // DATABASE SYNC - Every 60 seconds (persist to server)
   useEffect(() => {
     if (!userId || !stats || !isInitializedRef.current) return;
 
     const syncInterval = setInterval(async () => {
       try {
         const now = Date.now();
-        const secondsPassed = (now - lastSyncRef.current) / 1000;
+        const millisecondsPassed = now - lastRegenTimeRef.current;
+        const secondsPassed = millisecondsPassed / 1000;
         const energyRestored = Math.floor(secondsPassed / 60);
         const newEnergy = Math.max(0, Math.min(
           lastEnergyRef.current + energyRestored,
-          stats.max_energy
+          stats.max_energy || 100
         ));
 
-        // Update database
-        await supabase
-          .from('player_stats')
-          .update({
-            energy: newEnergy,
-            last_energy_regen: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          })
-          .eq('user_id', userId);
+        if (newEnergy > lastEnergyRef.current) {
+          // Only sync if energy actually changed and is valid
+          const safeEnergy = Math.max(0, Math.min(newEnergy, stats.max_energy || 100));
+          
+          await supabase
+            .from('player_stats')
+            .update({
+              energy: safeEnergy,
+              last_energy_regen: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })
+            .eq('user_id', userId);
 
-        // Reset sync timer
-        lastSyncRef.current = Date.now();
-        lastEnergyRef.current = newEnergy;
+          console.log('Energy synced to DB:', safeEnergy);
+          
+          // Reset tracking for next 60-second cycle
+          lastRegenTimeRef.current = Date.now();
+          lastEnergyRef.current = safeEnergy;
+        }
       } catch (error) {
         console.error('Energy sync error:', error);
       }
     }, 60000);
 
     return () => clearInterval(syncInterval);
-  }, [userId, stats]);
+  }, [userId, stats?.max_energy]);
 
-  // Update ref when energy changes from outside (hustle, etc)
+  // Update refs ONLY when energy is used (from hustles, etc)
+  // This fires when the parent updates stats.energy after a hustle
   useEffect(() => {
     if (!isInitializedRef.current) return;
-    lastEnergyRef.current = Math.max(0, stats?.energy || 0);
-    lastSyncRef.current = Date.now();
-  }, [stats?.energy]);
+
+    // Clamp incoming energy to valid range
+    const newEnergy = Math.max(0, Math.min(stats?.energy || 0, stats?.max_energy || 100));
+    
+    // Only update if energy decreased (hustle was used)
+    if (newEnergy < lastEnergyRef.current) {
+      console.log('Energy used:', lastEnergyRef.current, '->', newEnergy);
+      lastEnergyRef.current = newEnergy;
+      lastRegenTimeRef.current = Date.now(); // Reset regen timer after use
+    }
+  }, [stats?.energy, stats?.max_energy]);
 }

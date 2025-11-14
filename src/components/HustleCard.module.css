@@ -1,0 +1,181 @@
+/* 📁 src/components/HustleCard.module.css */
+/* Hustle card styling */
+
+.card {
+    background: #1a1a1a;
+    border: 2px solid #333333;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .card:hover:not(.disabled) {
+    border-color: #ffd700;
+    background: #242424;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.2);
+  }
+  
+  .card.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .icon {
+    font-size: 32px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+  }
+  
+  .titleSection {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  
+  .name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  
+  /* Description */
+  .description {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #b3b3b3;
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  /* Rewards */
+  .rewards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    background: rgba(255, 215, 0, 0.05);
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+  }
+  
+  .reward {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .label {
+    font-size: 12px;
+    line-height: 1;
+  }
+  
+  .value {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffd700;
+  }
+  
+  /* Energy Section */
+  .energySection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 6px;
+    border-left: 3px solid #ff6b6b;
+  }
+  
+  .energyLabel {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #b3b3b3;
+  }
+  
+  .energyCost {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ff6b6b;
+  }
+  
+  /* Execute Button */
+  .executeBtn {
+    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .executeBtn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  }
+  
+  .executeBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Warning */
+  .warning {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: #ff6b6b;
+    text-align: center;
+    padding: 6px;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 4px;
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      padding: 12px;
+    }
+  
+    .icon {
+      font-size: 28px;
+    }
+  
+    .name {
+      font-size: 13px;
+    }
+  
+    .rewards {
+      gap: 4px;
+      padding: 6px;
+    }
+  
+    .value {
+      font-size: 11px;
+    }
+  }

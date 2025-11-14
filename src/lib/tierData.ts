@@ -70,7 +70,7 @@ export const TIERS = {
   };
   
   export const BUSINESSES = {
-    1: [ // Tier 1 - YN
+    1: [ // Tier 1 - YN (BASE: 120-960 sec - DOUBLING pattern)
       {
         id: 'water-boy',
         name: 'Water Boy Crew',
@@ -78,15 +78,17 @@ export const TIERS = {
         tier: 1,
         baseIncome: 50,
         baseCost: 1000,
+        baseSpeed: 120,  // 2 min
         description: 'Sell water to the homies',
       },
       {
         id: 'boot-removal',
-        name: 'Boot Removal',
+        name: 'Car Boot Removal',
         icon: '👢',
         tier: 1,
         baseIncome: 75,
         baseCost: 2500,
+        baseSpeed: 240,  // 4 min (2x)
         description: 'Remove boots from cars',
       },
       {
@@ -96,6 +98,7 @@ export const TIERS = {
         tier: 1,
         baseIncome: 100,
         baseCost: 5000,
+        baseSpeed: 480,  // 8 min (2x)
         description: 'Buy and resell sneakers',
       },
       {
@@ -105,10 +108,11 @@ export const TIERS = {
         tier: 1,
         baseIncome: 150,
         baseCost: 10000,
+        baseSpeed: 960,  // 16 min (2x) - slowest in T1
         description: 'Rent studio time',
       },
     ],
-    2: [ // Tier 2 - Trap
+    2: [ // Tier 2 - Trap (BASE: 1920-15360 sec - CONTINUES doubling pattern)
       {
         id: 'trap-house',
         name: 'Trap House',
@@ -116,6 +120,7 @@ export const TIERS = {
         tier: 2,
         baseIncome: 500,
         baseCost: 50000,
+        baseSpeed: 1920,  // 32 min (2x from T1 slowest)
         description: 'Run a trap house',
       },
       {
@@ -125,6 +130,7 @@ export const TIERS = {
         tier: 2,
         baseIncome: 750,
         baseCost: 100000,
+        baseSpeed: 3840,  // 64 min (2x)
         description: 'Professional car wash',
       },
       {
@@ -134,6 +140,7 @@ export const TIERS = {
         tier: 2,
         baseIncome: 1000,
         baseCost: 150000,
+        baseSpeed: 7680,  // 128 min (2x)
         description: 'Mobile food operation',
       },
       {
@@ -143,10 +150,11 @@ export const TIERS = {
         tier: 2,
         baseIncome: 1500,
         baseCost: 250000,
+        baseSpeed: 15360,  // 256 min (2x) - slowest in T2
         description: 'Corner liquor store',
       },
     ],
-    3: [ // Tier 3 - Entrepreneur
+    3: [ // Tier 3 - Entrepreneur (BASE: 30720-245760 sec - CONTINUES doubling pattern)
       {
         id: 'car-dealership',
         name: 'Car Dealership',
@@ -154,6 +162,7 @@ export const TIERS = {
         tier: 3,
         baseIncome: 5000,
         baseCost: 500000,
+        baseSpeed: 30720,  // 512 min (2x from T2 slowest)
         description: 'Sell luxury cars',
       },
       {
@@ -163,6 +172,7 @@ export const TIERS = {
         tier: 3,
         baseIncome: 7500,
         baseCost: 1000000,
+        baseSpeed: 61440,  // 1024 min (2x)
         description: 'Property rentals',
       },
       {
@@ -172,6 +182,7 @@ export const TIERS = {
         tier: 3,
         baseIncome: 10000,
         baseCost: 2500000,
+        baseSpeed: 122880,  // 2048 min (2x)
         description: 'VIP nightclub',
       },
       {
@@ -181,10 +192,11 @@ export const TIERS = {
         tier: 3,
         baseIncome: 15000,
         baseCost: 5000000,
+        baseSpeed: 245760,  // 4096 min (2x) - slowest in T3
         description: 'Music production',
       },
     ],
-    4: [ // Tier 4 - Boss
+    4: [ // Tier 4 - Boss (BASE: 491520-3932160 sec - CONTINUES doubling pattern)
       {
         id: 'import-co',
         name: 'Import Co.',
@@ -192,6 +204,7 @@ export const TIERS = {
         tier: 4,
         baseIncome: 50000,
         baseCost: 10000000,
+        baseSpeed: 491520,  // 8192 min (2x from T3 slowest)
         description: 'International imports',
       },
       {
@@ -201,6 +214,7 @@ export const TIERS = {
         tier: 4,
         baseIncome: 75000,
         baseCost: 25000000,
+        baseSpeed: 983040,  // 16384 min (2x)
         description: 'Shipping operations',
       },
       {
@@ -210,6 +224,7 @@ export const TIERS = {
         tier: 4,
         baseIncome: 100000,
         baseCost: 50000000,
+        baseSpeed: 1966080,  // 32768 min (2x)
         description: 'Private jet leasing',
       },
       {
@@ -219,10 +234,11 @@ export const TIERS = {
         tier: 4,
         baseIncome: 150000,
         baseCost: 100000000,
+        baseSpeed: 3932160,  // 65536 min (2x) - slowest in T4
         description: 'Tech company',
       },
     ],
-    5: [ // Tier 5 - El Jefe
+    5: [ // Tier 5 - El Jefe (BASE: 7864320-62914560 sec - CONTINUES doubling pattern)
       {
         id: 'oil-field',
         name: 'Oil Field',
@@ -230,6 +246,7 @@ export const TIERS = {
         tier: 5,
         baseIncome: 500000,
         baseCost: 500000000,
+        baseSpeed: 7864320,  // 131072 min (2x from T4 slowest)
         description: 'Oil production',
       },
       {
@@ -239,6 +256,7 @@ export const TIERS = {
         tier: 5,
         baseIncome: 750000,
         baseCost: 1000000000,
+        baseSpeed: 15728640,  // 262144 min (2x)
         description: 'Renewable energy',
       },
       {
@@ -248,6 +266,7 @@ export const TIERS = {
         tier: 5,
         baseIncome: 1000000,
         baseCost: 2500000000,
+        baseSpeed: 31457280,  // 524288 min (2x)
         description: 'Luxury cruises',
       },
       {
@@ -257,6 +276,7 @@ export const TIERS = {
         tier: 5,
         baseIncome: 2000000,
         baseCost: 5000000000,
+        baseSpeed: 62914560,  // 1048576 min (2x) - slowest in T5
         description: 'International port',
       },
     ],
@@ -332,30 +352,272 @@ export const TIERS = {
     ],
   };
   
-  export const HUSTLES = {
-    1: [ // Tier 1
-      { id: 'hustle-1', name: 'Grind It', icon: '💪', reward: 100, xp: 5, energy: 10 },
-      { id: 'hustle-2', name: 'Hustle Hard', icon: '🔥', reward: 200, xp: 10, energy: 20 },
-      { id: 'hustle-3', name: 'Go All In', icon: '💯', reward: 500, xp: 25, energy: 50 },
-    ],
-    2: [ // Tier 2
-      { id: 'hustle-1', name: 'Street Work', icon: '🚗', reward: 1000, xp: 50, energy: 10 },
-      { id: 'hustle-2', name: 'Trap Grind', icon: '📦', reward: 2500, xp: 100, energy: 20 },
-      { id: 'hustle-3', name: 'Go Hard', icon: '💪', reward: 5000, xp: 250, energy: 50 },
-    ],
-    3: [ // Tier 3
-      { id: 'hustle-1', name: 'Business Deal', icon: '💼', reward: 10000, xp: 500, energy: 10 },
-      { id: 'hustle-2', name: 'Major Play', icon: '💰', reward: 25000, xp: 1000, energy: 20 },
-      { id: 'hustle-3', name: 'Big Move', icon: '🎯', reward: 50000, xp: 2500, energy: 50 },
-    ],
-    4: [ // Tier 4
-      { id: 'hustle-1', name: 'Corporation Deal', icon: '🏢', reward: 100000, xp: 5000, energy: 10 },
-      { id: 'hustle-2', name: 'National Play', icon: '🌎', reward: 250000, xp: 10000, energy: 20 },
-      { id: 'hustle-3', name: 'Empire Move', icon: '👑', reward: 500000, xp: 25000, energy: 50 },
-    ],
-    5: [ // Tier 5
-      { id: 'hustle-1', name: 'Global Deal', icon: '🌍', reward: 1000000, xp: 50000, energy: 10 },
-      { id: 'hustle-2', name: 'World Power', icon: '💎', reward: 2500000, xp: 100000, energy: 20 },
-      { id: 'hustle-3', name: 'Dominance', icon: '👑', reward: 5000000, xp: 250000, energy: 50 },
-    ],
-  };
+  // 📁 src/lib/tierData.ts - CORRECTED HUSTLES SECTION
+// Expand from 3 to 5 hustles per tier with street-themed names
+
+export const HUSTLES = {
+  1: [ // Tier 1 - YN (Youngin')
+    { 
+      id: 'hustle-1', 
+      name: 'Water Boy Crew', 
+      icon: '💧', 
+      reward: 100, 
+      xp: 5, 
+      energy: 5,
+      danger: 1,
+      description: 'Sell water to the homies. Low risk, quick cash.'
+    },
+    { 
+      id: 'hustle-2', 
+      name: 'Sneaker Resell', 
+      icon: '👢', 
+      reward: 150, 
+      xp: 7, 
+      energy: 8,
+      danger: 1,
+      description: 'Resell Fake Sneakers. Easy money.'
+    },
+    { 
+      id: 'hustle-3', 
+      name: 'Dime Bags', 
+      icon: '🛍️', 
+      reward: 250, 
+      xp: 12, 
+      energy: 15,
+      danger: 2,
+      description: 'Small package moving. Medium risk, better payout.'
+    },
+    { 
+      id: 'hustle-4', 
+      name: 'Petty Theft', 
+      icon: '🏪', 
+      reward: 400, 
+      xp: 18, 
+      energy: 25,
+      danger: 2,
+      description: 'Shoplift and resell. More risky, more profit.'
+    },
+    { 
+      id: 'hustle-5', 
+      name: 'Mugging', 
+      icon: '👊', 
+      reward: 600, 
+      xp: 30, 
+      energy: 40,
+      danger: 3,
+      description: 'Rob someone on street. High risk, high reward.'
+    },
+  ],
+  
+  2: [ // Tier 2 - Trap (Block Boss)
+    { 
+      id: 'hustle-1', 
+      name: 'Trap House Ops', 
+      icon: '🏚️', 
+      reward: 1000, 
+      xp: 50, 
+      energy: 10,
+      danger: 1,
+      description: 'Run a trap house. Standard operation.'
+    },
+    { 
+      id: 'hustle-2', 
+      name: 'Street Plug', 
+      icon: '📱', 
+      reward: 2500, 
+      xp: 100, 
+      energy: 20,
+      danger: 2,
+      description: 'Move weight on the street. Medium heat.'
+    },
+    { 
+      id: 'hustle-3', 
+      name: 'Jewelry Heist', 
+      icon: '💎', 
+      reward: 5000, 
+      xp: 200, 
+      energy: 40,
+      danger: 3,
+      description: 'Rob a jewelry store. High risk, high heat.'
+    },
+    { 
+      id: 'hustle-4', 
+      name: 'Car Jacking', 
+      icon: '🚗', 
+      reward: 7500, 
+      xp: 300, 
+      energy: 50,
+      danger: 3,
+      description: 'Steal and flip cars. Serious heat.'
+    },
+    { 
+      id: 'hustle-5', 
+      name: 'Store Robbery', 
+      icon: '🔫', 
+      reward: 10000, 
+      xp: 500, 
+      energy: 60,
+      danger: 4,
+      description: 'Armed robbery. Very dangerous, huge payout.'
+    },
+  ],
+  
+  3: [ // Tier 3 - Entrepreneur
+    { 
+      id: 'hustle-1', 
+      name: 'Business Deal', 
+      icon: '💼', 
+      reward: 10000, 
+      xp: 500, 
+      energy: 10,
+      danger: 1,
+      description: 'Legitimate business negotiation. Clean.'
+    },
+    { 
+      id: 'hustle-2', 
+      name: 'Casino Night', 
+      icon: '🎰', 
+      reward: 25000, 
+      xp: 1000, 
+      energy: 20,
+      danger: 2,
+      description: 'High stakes gambling run. Some risk.'
+    },
+    { 
+      id: 'hustle-3', 
+      name: 'Bank Robbery Plan', 
+      icon: '🏦', 
+      reward: 50000, 
+      xp: 2500, 
+      energy: 40,
+      danger: 3,
+      description: 'Plan and execute bank job. Major heat.'
+    },
+    { 
+      id: 'hustle-4', 
+      name: 'Home Invasion', 
+      icon: '🏠', 
+      reward: 75000, 
+      xp: 3500, 
+      energy: 50,
+      danger: 3,
+      description: 'Raid a wealthy home. Serious consequences.'
+    },
+    { 
+      id: 'hustle-5', 
+      name: 'Major Heist', 
+      icon: '💰', 
+      reward: 100000, 
+      xp: 5000, 
+      energy: 60,
+      danger: 4,
+      description: 'Orchestrate major robbery. Maximum heat.'
+    },
+  ],
+  
+  4: [ // Tier 4 - Boss
+    { 
+      id: 'hustle-1', 
+      name: 'Corporation Deal', 
+      icon: '🏢', 
+      reward: 100000, 
+      xp: 5000, 
+      energy: 10,
+      danger: 1,
+      description: 'Corporate negotiation and contracts.'
+    },
+    { 
+      id: 'hustle-2', 
+      name: 'Hitman Job', 
+      icon: '🎯', 
+      reward: 250000, 
+      xp: 10000, 
+      energy: 20,
+      danger: 2,
+      description: 'Contract killing for hire. Extreme risk.'
+    },
+    { 
+      id: 'hustle-3', 
+      name: 'Middle Man Deals', 
+      icon: '🤝', 
+      reward: 500000, 
+      xp: 25000, 
+      energy: 40,
+      danger: 3,
+      description: 'International broker between cartels.'
+    },
+    { 
+      id: 'hustle-4', 
+      name: 'Stolen Goods Fence', 
+      icon: '📦', 
+      reward: 750000, 
+      xp: 35000, 
+      energy: 50,
+      danger: 3,
+      description: 'Move stolen military weapons internationally.'
+    },
+    { 
+      id: 'hustle-5', 
+      name: 'National Play', 
+      icon: '🌎', 
+      reward: 1000000, 
+      xp: 50000, 
+      energy: 60,
+      danger: 4,
+      description: 'Nationwide criminal operation.'
+    },
+  ],
+  
+  5: [ // Tier 5 - El Jefe
+    { 
+      id: 'hustle-1', 
+      name: 'Global Deal', 
+      icon: '🌍', 
+      reward: 1000000, 
+      xp: 50000, 
+      energy: 10,
+      danger: 1,
+      description: 'Worldwide business operation.'
+    },
+    { 
+      id: 'hustle-2', 
+      name: 'International Cartel', 
+      icon: '🚁', 
+      reward: 2500000, 
+      xp: 100000, 
+      energy: 20,
+      danger: 2,
+      description: 'Control international cartel operations.'
+    },
+    { 
+      id: 'hustle-3', 
+      name: 'Government Contract', 
+      icon: '🕵️', 
+      reward: 5000000, 
+      xp: 250000, 
+      energy: 40,
+      danger: 3,
+      description: 'Secret government contracts.'
+    },
+    { 
+      id: 'hustle-4', 
+      name: 'Offshore Operation', 
+      icon: '🏝️', 
+      reward: 7500000, 
+      xp: 350000, 
+      energy: 50,
+      danger: 3,
+      description: 'Island-based criminal empire.'
+    },
+    { 
+      id: 'hustle-5', 
+      name: 'World Dominance', 
+      icon: '👑', 
+      reward: 10000000, 
+      xp: 500000, 
+      energy: 60,
+      danger: 5,
+      description: 'Global criminal empire. Ultimate power.'
+    },
+  ],
+};

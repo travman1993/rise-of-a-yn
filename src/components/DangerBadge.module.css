@@ -1,0 +1,66 @@
+/* 📁 src/components/DangerBadge.module.css */
+/* Danger badge styling */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  
+  .dots {
+    display: flex;
+    gap: 1px;
+    font-size: 8px;
+    line-height: 1;
+  }
+  
+  .label {
+    color: inherit;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Color variants (set via borderColor in component) */
+  /* Green (Low) */
+  .badge {
+    color: #10b981;
+  }
+  
+  /* Amber (Medium) */
+  .badge {
+    color: #f59e0b;
+  }
+  
+  /* Orange (High) */
+  .badge {
+    color: #f97316;
+  }
+  
+  /* Red (Very High) */
+  .badge {
+    color: #ef4444;
+  }
+  
+  /* Dark Red (Extreme) */
+  .badge {
+    color: #dc2626;
+  }
+  
+  @media (max-width: 768px) {
+    .badge {
+      font-size: 9px;
+      padding: 3px 6px;
+    }
+  
+    .dots {
+      font-size: 7px;
+    }
+  }

@@ -1,22 +1,9 @@
-[00:00:00.617] Server  LOG      ✓ Ready in 406ms
-[00:00:03.311] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:04.325] Server  ERROR   Offline GET error: {}
-[02:50:48.423] Browser ERROR   Load businesses error: {}
-[02:50:48.424] Browser ERROR   Load businesses error: {}
-[02:50:53.678] Server  ERROR   Offline GET error: {}
-[02:53:15.160] Server  ERROR   Offline GET error: {}
-[03:02:56.948] Browser ERROR   Load businesses error: {}
-[03:02:57.119] Browser ERROR   Load businesses error: {}
-[03:11:13.116] Server  ERROR   Offline GET error: {}
-[03:34:05.196] Server  ERROR   Offline GET error: {}
-[03:36:20.355] Server  ERROR   Offline GET error: {}
-[03:36:23.665] Browser ERROR   Leaderboard error: {}
-[03:36:23.665] Browser ERROR   Leaderboard error: {}
-[03:36:27.925] Browser ERROR   Leaderboard error: {}
-[03:36:28.752] Browser ERROR   Leaderboard error: {}
-[03:36:29.575] Browser ERROR   Leaderboard error: {}
-[03:36:30.843] Browser ERROR   Leaderboard error: {}
-[03:37:10.443] Server  ERROR   Offline GET error: {}
-[03:37:57.662] Server  ERROR   Offline GET error: {}
-[03:38:26.613] Server  ERROR   Offline GET error: {}
-[03:40:31.674] Server  ERROR   Offline GET error: {}
+[00:00:00.728] Server  LOG      ✓ Ready in 508ms
+[00:00:02.517] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:05.021] Browser ERROR   Load businesses error: {}
+[00:00:56.591] Browser ERROR   Buy error: {}
+[00:03:14.269] Server  LOG      ✓ Compiled in 62ms
+[00:03:20.704] Browser ERROR   Buy error: {}
+[00:03:23.276] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:23.970] Browser ERROR   Load businesses error: {}
+[00:03:28.176] Browser ERROR   Buy error: {}
