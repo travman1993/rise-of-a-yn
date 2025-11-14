@@ -1,42 +1,6 @@
 {
-  "app": {
-    "[project]/src/app/_not-found/page": [
-      "static/media/2290fed2b3404919-s.p.ed928179.woff2",
-      "static/media/dc0d9adbac686440-s.p.3b382e45.woff2",
-      "static/media/8d05cfa5faa8406c-s.p.4adea45d.woff2"
-    ],
-    "[project]/src/app/dashboard/businesses/page": [
-      "static/media/2290fed2b3404919-s.p.ed928179.woff2",
-      "static/media/dc0d9adbac686440-s.p.3b382e45.woff2",
-      "static/media/8d05cfa5faa8406c-s.p.4adea45d.woff2"
-    ],
-    "[project]/src/app/dashboard/crews/page": [
-      "static/media/2290fed2b3404919-s.p.ed928179.woff2",
-      "static/media/dc0d9adbac686440-s.p.3b382e45.woff2",
-      "static/media/8d05cfa5faa8406c-s.p.4adea45d.woff2"
-    ],
-    "[project]/src/app/dashboard/leaderboards/page": [
-      "static/media/2290fed2b3404919-s.p.ed928179.woff2",
-      "static/media/dc0d9adbac686440-s.p.3b382e45.woff2",
-      "static/media/8d05cfa5faa8406c-s.p.4adea45d.woff2"
-    ],
-    "[project]/src/app/dashboard/minigames/page": [
-      "static/media/2290fed2b3404919-s.p.ed928179.woff2",
-      "static/media/dc0d9adbac686440-s.p.3b382e45.woff2",
-      "static/media/8d05cfa5faa8406c-s.p.4adea45d.woff2"
-    ],
-    "[project]/src/app/dashboard/page": [
-      "static/media/2290fed2b3404919-s.p.ed928179.woff2",
-      "static/media/dc0d9adbac686440-s.p.3b382e45.woff2",
-      "static/media/8d05cfa5faa8406c-s.p.4adea45d.woff2"
-    ],
-    "[project]/src/app/dashboard/shop/page": [
-      "static/media/2290fed2b3404919-s.p.ed928179.woff2",
-      "static/media/dc0d9adbac686440-s.p.3b382e45.woff2",
-      "static/media/8d05cfa5faa8406c-s.p.4adea45d.woff2"
-    ]
-  },
-  "appUsingSizeAdjust": true,
+  "app": {},
+  "appUsingSizeAdjust": false,
   "pages": {},
   "pagesUsingSizeAdjust": false
 }
