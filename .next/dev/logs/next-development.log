@@ -139,3 +139,32 @@ Import traces:
 [02:32:44.594] Browser LOG     [Leaderboard] Fetching wealth leaderboard...
 [02:32:44.594] Browser ERROR   [Leaderboard] API error: 404 Not Found
 [02:32:44.594] Browser ERROR   [Leaderboard] Error loading: {}
+[02:35:30.201] Browser LOG     [Leaderboard] Fetching prestige leaderboard...
+[02:35:30.201] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:35:30.201] Browser ERROR   [Leaderboard] Error loading: {}
+[02:35:30.927] Browser LOG     [Leaderboard] Fetching respect leaderboard...
+[02:35:30.927] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:35:30.927] Browser ERROR   [Leaderboard] Error loading: {}
+[02:35:33.302] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:35:33.432] Browser LOG     [Leaderboard] Fetching wealth leaderboard...
+[02:35:33.432] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:35:33.432] Browser ERROR   [Leaderboard] Error loading: {}
+[02:35:33.790] Browser LOG     [Leaderboard] Fetching wealth leaderboard...
+[02:35:33.790] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:35:33.790] Browser ERROR   [Leaderboard] Error loading: {}
+[02:35:35.522] Browser LOG     Energy system initialized: {"clampedEnergy":1,"lastRegenTime":"2025-11-14T20:10:21.868Z","maxEnergy":100,"rawEnergy":1}
+[02:35:36.659] Browser LOG     Energy used: 1 -> 0
+[02:35:37.541] Browser LOG     [Leaderboard] Fetching wealth leaderboard...
+[02:35:37.541] Browser LOG     [Leaderboard] Fetching wealth leaderboard...
+[02:35:37.541] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:35:37.541] Browser ERROR   [Leaderboard] Error loading: {}
+[02:35:37.541] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:35:37.541] Browser ERROR   [Leaderboard] Error loading: {}
+[02:35:37.541] Browser LOG     [Leaderboard] Fetching wealth leaderboard...
+[02:35:37.541] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:35:37.541] Browser ERROR   [Leaderboard] Error loading: {}
+[02:35:37.680] Browser LOG     [Leaderboard] Fetching wealth leaderboard...
+[02:35:37.680] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:35:37.680] Browser ERROR   [Leaderboard] Error loading: {}
+[02:35:46.266] Browser LOG     Energy system initialized: {"clampedEnergy":1,"lastRegenTime":"2025-11-14T20:10:21.868Z","maxEnergy":100,"rawEnergy":1}
+[02:35:47.348] Browser LOG     Energy used: 1 -> 0
