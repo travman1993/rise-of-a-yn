@@ -1,5 +1,5 @@
 // 📁 src/app/dashboard/businesses/page.tsx
-// Businesses Management - Buy, Hire, Collect (FIXED)
+// Businesses Management - Buy, Hire, Collect (FIXED - No TIER_COSTS)
 
 'use client';
 
@@ -24,14 +24,6 @@ interface Business {
   last_collected: string;
   image_url: string;
 }
-
-const TIER_COSTS = {
-  1: 10000,
-  2: 50000,
-  3: 500000,
-  4: 10000000,
-  5: 100000000,
-};
 
 export default function BusinessesPage() {
   const router = useRouter();
@@ -315,18 +307,20 @@ export default function BusinessesPage() {
               {availableTiers.map((tier) => (
                 <div key={tier} className={styles.tierSection}>
                   <h3 className={styles.tierTitle}>Tier {tier}</h3>
-                  <p className={styles.tierPrice}>{formatCash(TIER_COSTS[tier as keyof typeof TIER_COSTS])}</p>
                   <div className={styles.tierBusinesses}>
                     {(BUSINESSES[tier as keyof typeof BUSINESSES] || []).map((template: any) => (
                       <button
                         key={template.id}
                         onClick={() => handleBuyBusiness(template)}
-                        disabled={
-                          loading || stats.cash < template.baseCost
-                        }
+                        disabled={loading || stats.cash < template.baseCost}
                         className={styles.buyBusinessBtn}
+                        title={`Cost: ${formatCash(template.baseCost)}`}
                       >
                         {template.icon} {template.name}
+                        <br />
+                        <small style={{ fontSize: '10px', opacity: 0.8 }}>
+                          ${formatCash(template.baseCost)}
+                        </small>
                       </button>
                     ))}
                   </div>

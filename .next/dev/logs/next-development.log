@@ -7,3 +7,95 @@
 [00:03:23.276] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:03:23.970] Browser ERROR   Load businesses error: {}
 [00:03:28.176] Browser ERROR   Buy error: {}
+[00:08:15.911] Browser LOG     Energy system initialized: {"clampedEnergy":0,"lastRegenTime":"2025-11-14T09:59:04.612Z","maxEnergy":100,"rawEnergy":0}
+[00:08:21.160] Browser ERROR   Load businesses error: {}
+[00:08:21.349] Browser ERROR   Load businesses error: {}
+[00:08:26.960] Browser ERROR   Buy error: {}
+[00:08:30.606] Browser ERROR   Buy error: {}
+[00:08:32.969] Browser ERROR   Buy error: {}
+[00:12:08.259] Browser ERROR   Buy error: {}
+[00:13:29.385] Server  LOG      ✓ Compiled in 42ms
+[00:13:30.019] Browser ERROR   uncaughtError: ReferenceError: TIER_COSTS is not defined
+[00:16:44.827] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:16:44.925] Server  LOG      ✓ Compiled in 35ms
+[00:16:45.037] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:46.020] Browser ERROR   Load businesses error: {}
+[00:16:56.523] Browser ERROR   Buy error: {}
+[00:17:05.857] Browser ERROR   Buy error: {}
+[00:17:08.326] Browser ERROR   Buy error: {}
+[00:17:16.998] Browser ERROR   Buy error: {}
+[00:19:28.379] Server  LOG     📥 API Request: {}
+[00:19:29.046] Server  LOG     ✅ Player stats: {}
+[00:19:29.047] Server  LOG     🛍️ BUY ACTION - businessData: {}
+[00:19:29.047] Server  LOG     💰 Business cost: 1000, Player cash: 151492
+[00:19:29.047] Server  LOG     🔍 Checking if already owns: Water Boy Crew
+[00:19:29.374] Server  LOG     Found existing records: []
+[00:19:29.375] Server  LOG     ➕ Creating new business: {}
+[00:19:29.525] Server  ERROR   ❌ Create business error: {}
+[00:19:29.526] Server  ERROR   ❌ Businesses POST error: {}
+[00:21:55.676] Server  LOG     📥 API Request: {}
+[00:21:56.094] Server  LOG     ✅ Player stats: {}
+[00:21:56.096] Server  LOG     🛍️ BUY ACTION - businessData: {}
+[00:21:56.097] Server  LOG     💰 Business cost: 1000, Player cash: 151492
+[00:21:56.097] Server  LOG     🔍 Checking if already owns: Water Boy Crew
+[00:21:56.413] Server  LOG     Found existing records: []
+[00:21:56.414] Server  LOG     ➕ Creating new business: {}
+[00:21:56.550] Server  LOG     ✅ Business created: "87b85ebc-bce2-4d46-99fb-aff0d38f671d"
+[00:21:56.664] Server  LOG     ✅ Cash deducted: 1000
+[00:22:01.967] Server  LOG     📥 API Request: {}
+[00:22:02.203] Server  LOG     ✅ Player stats: {}
+[00:22:06.988] Server  LOG     📥 API Request: {}
+[00:22:07.104] Server  LOG     ✅ Player stats: {}
+[00:22:10.981] Server  LOG     📥 API Request: {}
+[00:22:11.099] Server  LOG     ✅ Player stats: {}
+[00:22:15.433] Server  LOG     📥 API Request: {}
+[00:22:15.541] Server  LOG     ✅ Player stats: {}
+[00:22:43.918] Server  LOG     📥 API Request: {}
+[00:22:44.242] Server  LOG     ✅ Player stats: {}
+[00:22:44.243] Server  LOG     🛍️ BUY ACTION - businessData: {}
+[00:22:44.244] Server  LOG     💰 Business cost: 1000, Player cash: 130492
+[00:22:44.244] Server  LOG     🔍 Checking if already owns: Water Boy Crew
+[00:22:44.478] Server  LOG     Found existing records: [{...}]
+[00:22:44.479] Server  ERROR   ❌ Already owns this business
+[00:22:49.061] Server  LOG     📥 API Request: {}
+[00:22:49.166] Server  LOG     ✅ Player stats: {}
+[00:22:49.170] Server  LOG     🛍️ BUY ACTION - businessData: {}
+[00:22:49.171] Server  LOG     💰 Business cost: 1000, Player cash: 130492
+[00:22:49.172] Server  LOG     🔍 Checking if already owns: Water Boy Crew
+[00:22:49.376] Server  LOG     Found existing records: [{...}]
+[00:22:49.377] Server  ERROR   ❌ Already owns this business
+[00:22:59.481] Server  LOG     📥 API Request: {}
+[00:22:59.748] Server  LOG     ✅ Player stats: {}
+[00:22:59.748] Server  LOG     🛍️ BUY ACTION - businessData: {}
+[00:22:59.749] Server  LOG     💰 Business cost: 2500, Player cash: 130492
+[00:22:59.749] Server  LOG     🔍 Checking if already owns: Car Boot Removal
+[00:22:59.995] Server  LOG     Found existing records: []
+[00:22:59.996] Server  LOG     ➕ Creating new business: {}
+[00:23:00.097] Server  LOG     ✅ Business created: "13c2e4aa-bc8a-4b8a-a199-ba0a154d10ab"
+[00:23:00.210] Server  LOG     ✅ Cash deducted: 2500
+[00:23:03.860] Server  LOG     📥 API Request: {}
+[00:23:03.977] Server  LOG     ✅ Player stats: {}
+[00:23:03.978] Server  LOG     🛍️ BUY ACTION - businessData: {}
+[00:23:03.978] Server  LOG     💰 Business cost: 5000, Player cash: 127992
+[00:23:03.979] Server  LOG     🔍 Checking if already owns: Sneaker Flip
+[00:23:04.085] Server  LOG     Found existing records: []
+[00:23:04.085] Server  LOG     ➕ Creating new business: {}
+[00:23:04.209] Server  LOG     ✅ Business created: "6a7a8b12-33e7-4f40-9aa8-09937aa674fd"
+[00:23:04.320] Server  LOG     ✅ Cash deducted: 5000
+[00:23:06.122] Server  LOG     📥 API Request: {}
+[00:23:06.231] Server  LOG     ✅ Player stats: {}
+[00:23:06.232] Server  LOG     🛍️ BUY ACTION - businessData: {}
+[00:23:06.232] Server  LOG     💰 Business cost: 10000, Player cash: 122992
+[00:23:06.233] Server  LOG     🔍 Checking if already owns: Studio Shares
+[00:23:06.345] Server  LOG     Found existing records: []
+[00:23:06.346] Server  LOG     ➕ Creating new business: {}
+[00:23:06.457] Server  LOG     ✅ Business created: "a8d9abc7-a43c-4d43-b472-38661119b40d"
+[00:23:06.560] Server  LOG     ✅ Cash deducted: 10000
+[00:23:09.158] Server  LOG     📥 API Request: {}
+[00:23:09.280] Server  LOG     ✅ Player stats: {}
+[00:23:12.268] Server  LOG     📥 API Request: {}
+[00:23:12.391] Server  LOG     ✅ Player stats: {}
+[00:23:14.467] Server  LOG     📥 API Request: {}
+[00:23:14.575] Server  LOG     ✅ Player stats: {}
+[00:23:16.407] Server  LOG     📥 API Request: {}
+[00:23:16.524] Server  LOG     ✅ Player stats: {}
