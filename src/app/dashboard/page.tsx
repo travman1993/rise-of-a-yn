@@ -1,5 +1,5 @@
 // 📁 src/app/dashboard/page.tsx
-// FIXED - Main game dashboard with energy regen timer and asset cards
+// FIXED - Shows ALL hustles from Tier 1 through current tier
 
 'use client';
 
@@ -15,7 +15,7 @@ import { calculateEnergyRegen, formatTimeRemaining } from '@/lib/energy';
 import { useEnergyRegen } from '@/lib/useEnergyRegen';
 import styles from './dashboard.module.css';
 import { HustleCard } from '@/components/HustleCard';
-import { HUSTLES } from '@/lib/tierData';
+import { HUSTLES, TIERS } from '@/lib/tierData';
 
 interface AssetWithCount {
   id: string;
@@ -369,13 +369,13 @@ export default function Dashboard() {
             </div>
           )}
 
-          {/* HUSTLE TAB */}
+          {/* HUSTLE TAB - NOW SHOWS ALL TIERS 1 THROUGH CURRENT */}
           {activeTab === 'hustle' && (
             <div className={styles.tabContent}>
               <div style={{ marginBottom: '20px' }}>
                 <h2 style={{ color: '#ffd700', marginBottom: '8px' }}>TAP TO EARN</h2>
                 <p style={{ color: '#b3b3b3', fontSize: '12px', margin: 0 }}>
-                  Tier {stats?.tier} - Higher danger = higher rewards. Choose wisely.
+                  Tier {stats?.tier} - Access all hustles from Tier 1 to {stats?.tier}. Build your empire!
                 </p>
               </div>
 
@@ -398,38 +398,81 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* HUSTLES GRID */}
+              {/* HUSTLES BY TIER - LOOP THROUGH ALL AVAILABLE TIERS */}
               {(() => {
-                const currentTierHustles = HUSTLES[stats?.tier as keyof typeof HUSTLES] || [];
+                const availableTiers = Array.from(
+                  { length: stats?.tier || 1 },
+                  (_, i) => i + 1
+                );
+
                 return (
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                    gap: '16px',
-                  }}>
-                    {currentTierHustles.map((hustle: any) => (
-                      <HustleCard
-                        key={hustle.id}
-                        hustle={hustle}
-                        currentEnergy={stats?.energy || 0}
-                        maxEnergy={stats?.max_energy || 100}
-                        onExecute={handleExecuteHustle}
-                        loading={hustleLoading}
-                      />
-                    ))}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                    {availableTiers.map((tierNum) => {
+                      const tierData = TIERS[tierNum as keyof typeof TIERS];
+                      const tierHustles = HUSTLES[tierNum as keyof typeof HUSTLES] || [];
+
+                      if (!tierData || tierHustles.length === 0) return null;
+
+                      return (
+                        <div key={tierNum}>
+                          {/* TIER HEADER */}
+                          <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            marginBottom: '16px',
+                            paddingBottom: '12px',
+                            borderBottom: '2px solid #ffd700',
+                          }}>
+                            <h3 style={{
+                              margin: 0,
+                              color: '#ffd700',
+                              fontSize: '18px',
+                              letterSpacing: '1px',
+                            }}>
+                              {tierData.icon} TIER {tierNum} - {tierData.name}
+                            </h3>
+                            <span style={{
+                              color: '#a0aec0',
+                              fontSize: '12px',
+                            }}>
+                              {tierHustles.length} hustles
+                            </span>
+                          </div>
+
+                          {/* HUSTLES GRID FOR THIS TIER */}
+                          <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                            gap: '16px',
+                            marginBottom: '20px',
+                          }}>
+                            {tierHustles.map((hustle: any) => (
+                              <HustleCard
+                                key={`tier-${tierNum}-${hustle.id}`}
+                                hustle={hustle}
+                                currentEnergy={stats?.energy || 0}
+                                maxEnergy={stats?.max_energy || 100}
+                                onExecute={handleExecuteHustle}
+                                loading={hustleLoading}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 );
               })()}
 
               {/* EMPTY STATE */}
-              {(!HUSTLES[stats?.tier as keyof typeof HUSTLES] || 
-                HUSTLES[stats?.tier as keyof typeof HUSTLES].length === 0) && (
+              {(!stats?.tier || stats.tier < 1) && (
                 <div style={{
                   textAlign: 'center',
                   padding: '40px 20px',
                   color: '#b3b3b3',
                 }}>
-                  <p>No hustles available for this tier yet.</p>
+                  <p>No hustles available yet. Keep grinding!</p>
                 </div>
               )}
             </div>

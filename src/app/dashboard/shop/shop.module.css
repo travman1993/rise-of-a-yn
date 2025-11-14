@@ -1,250 +1,406 @@
 /* 📁 src/app/dashboard/shop/shop.module.css */
-/* Flex Shop Styling */
+/* Asset Shop Styling - FIXED for all asset categories */
 
 .wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #050505 0%, #0a0a0a 100%);
-    background-attachment: fixed;
-    overflow-y: auto;
-    z-index: 1000;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: 100vh;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: #ffd700;
-    margin: 0;
-    letter-spacing: -0.5px;
-  }
-  
-  .backBtn {
-    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-    color: #000;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 11px;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-  }
-  
-  .backBtn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-  }
-  
-  .cashBar {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
-    border: 1px solid #ffd700;
-    border-radius: 8px;
-    padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .cashLabel {
-    color: #b3b3b3;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  
-  .cashValue {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 18px;
-    font-weight: 900;
-    color: #ffd700;
-  }
-  
-  /* FILTERS */
-  .filters {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 8px;
-  }
-  
-  .filterBtn {
-    background: #1a1a1a;
-    border: 1px solid #333333;
-    color: #b3b3b3;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-  }
-  
-  .filterBtn:hover {
-    border-color: #ffd700;
-    color: #ffd700;
-    background: rgba(255, 215, 0, 0.05);
-  }
-  
-  .filterBtn.active {
-    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-    color: #000;
-    border-color: #ffd700;
-  }
-  
-  /* SHOP GRID */
-  .shopGrid {
-    display: grid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #050505 0%, #0a0a0a 100%);
+  background-attachment: fixed;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #ffd700;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.backBtn {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+  color: #000;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 11px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.backBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+/* CASH BAR */
+.cashBar {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border: 1px solid #ffd700;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.cashLabel {
+  color: #b3b3b3;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cashValue {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffd700;
+}
+
+.tierBadge {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+/* CATEGORY TABS */
+.categoryTabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #333333;
+}
+
+.categoryTab {
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  color: #b3b3b3;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.categoryTab:hover {
+  border-color: #ffd700;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.categoryTab.active {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+  color: #000;
+  border-color: #ffd700;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+/* ASSETS GRID */
+.assetsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+/* ASSET CARD */
+.assetCard {
+  position: relative;
+  background: #1a1a1a;
+  border: 2px solid #333333;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  min-height: 280px;
+  justify-content: space-between;
+}
+
+.assetCard:hover:not(.owned):not(.locked) {
+  border-color: #ffd700;
+  background: #242424;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.2);
+}
+
+.assetCard.owned {
+  opacity: 0.7;
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.assetCard.locked {
+  opacity: 0.5;
+  border-color: #666;
+  background: rgba(100, 100, 100, 0.05);
+}
+
+/* TIER TAG - Top right corner */
+.tierTag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* ASSET ICON */
+.assetIcon {
+  font-size: 56px;
+  margin: 0 0 12px;
+  line-height: 1;
+  display: block;
+}
+
+/* ASSET NAME */
+.assetName {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 8px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+/* PRICE */
+.price {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  color: #ffd700;
+  margin: 8px 0;
+  padding: 6px 0;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  width: 100%;
+}
+
+/* STAT BONUSES */
+.bonuses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  width: 100%;
+  margin: 8px 0;
+}
+
+.bonusItem {
+  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #b3b3b3;
+  display: block;
+}
+
+/* STATUS BADGES - Overlay */
+.ownedStatus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(16, 185, 129, 0.9);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 10;
+}
+
+.lockedStatus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(100, 100, 100, 0.9);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 10;
+}
+
+.poorStatus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 107, 107, 0.9);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 10;
+}
+
+/* BUY BUTTON */
+.buyBtn {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+  color: #000;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  cursor: pointer;
+  width: 100%;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+}
+
+.buyBtn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.buyBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #666;
+}
+
+.buyBtn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .assetsGrid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 16px;
   }
-  
-  .shopCard {
-    background: #1a1a1a;
-    border: 2px solid #333333;
-    border-radius: 12px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+    max-width: 100%;
   }
-  
-  .shopCard:hover:not(.owned) {
-    border-color: #ffd700;
-    background: #242424;
-    transform: translateY(-4px);
-    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.2);
+
+  .categoryTabs {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .shopCard.owned {
-    opacity: 0.6;
-    border-color: #10b981;
-    background: rgba(16, 185, 129, 0.05);
+
+  .assetsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
   }
-  
-  .itemIcon {
-    font-size: 48px;
-    margin: 0 0 12px;
-    line-height: 1;
+
+  .assetCard {
+    min-height: 240px;
+    padding: 12px;
   }
-  
-  .itemName {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 900;
-    color: #ffd700;
-    margin: 0 0 12px;
-    line-height: 1.2;
+
+  .assetIcon {
+    font-size: 44px;
+    margin-bottom: 8px;
   }
-  
-  .bonuses {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 100%;
-    margin: 12px 0;
+
+  .assetName {
+    font-size: 12px;
   }
-  
-  .bonus {
-    background: rgba(255, 215, 0, 0.1);
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    padding: 6px 8px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-  }
-  
-  .bonusLabel {
-    color: #b3b3b3;
-  }
-  
-  .bonusValue {
-    color: #ffd700;
-    font-weight: 700;
-  }
-  
+
   .price {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 900;
-    color: #ffd700;
-    margin: 12px 0;
+    font-size: 12px;
   }
-  
+
+  .bonuses {
+    gap: 2px;
+  }
+
+  .bonusItem {
+    font-size: 9px;
+    padding: 3px 4px;
+  }
+
   .buyBtn {
-    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-    color: #000;
-    border: none;
-    padding: 10px 12px;
-    border-radius: 6px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
     font-size: 11px;
-    cursor: pointer;
-    width: 100%;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
+    padding: 8px 10px;
   }
-  
-  .buyBtn:hover:not(:disabled) {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+@media (max-width: 480px) {
+  .assetsGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .buyBtn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: #666;
+
+  .assetCard {
+    min-height: 200px;
+    padding: 10px;
   }
-  
-  .shopCard.owned .buyBtn {
-    background: #10b981;
+
+  .assetIcon {
+    font-size: 36px;
   }
-  
-  @media (max-width: 768px) {
-    .container {
-      padding: 12px;
-      max-width: 100%;
-    }
-  
-    .filters {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  
-    .shopGrid {
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 12px;
-    }
-  
-    .itemIcon {
-      font-size: 40px;
-    }
-  
-    .itemName {
-      font-size: 12px;
-    }
+
+  .tierTag {
+    font-size: 9px;
+    padding: 2px 6px;
   }
+
+  .ownedStatus,
+  .lockedStatus,
+  .poorStatus {
+    font-size: 11px;
+    padding: 8px 16px;
+  }
+}

@@ -47,3 +47,69 @@
 [00:32:49.206] Server  LOG      ✓ Compiled in 29ms
 [00:34:32.280] Server  LOG      ✓ Compiled in 46ms
 [00:34:34.568] Browser ERROR   Load owned assets error: {}
+[00:52:27.235] Server  LOG      ✓ Compiled in 65ms
+[00:53:53.476] Browser ERROR   Buy asset error: {}
+[00:53:59.671] Browser ERROR   Buy asset error: {}
+[01:00:24.913] Server  ERROR   {}
+[01:00:26.904] Browser ERROR   Buy asset error: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[01:11:49.038] Server  ERROR   {}
+[01:11:51.793] Browser ERROR   Buy asset error: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[01:11:53.891] Server  ERROR   {}
+[01:11:55.226] Browser ERROR   Buy asset error: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[01:13:01.109] Browser LOG     Energy system initialized: {"clampedEnergy":8,"lastRegenTime":"2025-11-14T18:06:33.453Z","maxEnergy":100,"rawEnergy":8}
+[01:13:02.223] Browser LOG     Energy used: 8 -> 0
+[01:13:12.118] Browser LOG     Energy system initialized: {"clampedEnergy":8,"lastRegenTime":"2025-11-14T18:06:33.453Z","maxEnergy":100,"rawEnergy":8}
+[01:13:13.281] Browser LOG     Energy used: 8 -> 0
+[01:16:12.131] Browser LOG     Energy synced to DB: 1
+[01:16:42.130] Browser LOG     Energy synced to DB: 2
+[01:17:36.294] Browser ERROR   {}
+[01:17:36.294] Browser ERROR   Get current user error: {"__isAuthError":true,"name":"AuthRetryableFetchError","status":0}
+[01:17:36.294] Browser ERROR   {}
+[01:17:36.294] Browser ERROR   Get current user error: {"__isAuthError":true,"name":"AuthRetryableFetchError","status":0}
+[01:17:58.409] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:18:03.692] Browser LOG     Energy system initialized: {"clampedEnergy":8,"lastRegenTime":"2025-11-14T18:06:33.453Z","maxEnergy":100,"rawEnergy":8}
+[01:18:05.029] Browser LOG     Energy used: 8 -> 0
+[01:18:54.085] Browser LOG     Energy system initialized: {"clampedEnergy":8,"lastRegenTime":"2025-11-14T18:06:33.453Z","maxEnergy":100,"rawEnergy":8}
+[01:18:56.320] Browser LOG     Energy used: 8 -> 0
+[01:20:55.593] Browser LOG     Energy synced to DB: 1
+[01:22:55.594] Browser LOG     Energy synced to DB: 2
+[01:24:55.594] Browser LOG     Energy synced to DB: 3
+[01:26:10.593] Browser LOG     Energy synced to DB: 4
+[01:26:44.303] Server  LOG      ✓ Compiled in 68ms
+[01:26:44.592] Browser ERROR   ./src/app/dashboard/page.tsx:470:1
+Parsing ecmascript source code failed
+  468 |     </div>
+  469 |   );
+> 470 | }
+      | ^
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./src/app/dashboard/page.tsx [Client Component Browser]
+    ./src/app/dashboard/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/dashboard/page.tsx [Client Component SSR]
+    ./src/app/dashboard/page.tsx [Server Component]
+[01:27:55.593] Browser LOG     Energy synced to DB: 5
+[01:29:10.593] Browser LOG     Energy synced to DB: 6
+[01:31:10.592] Browser LOG     Energy synced to DB: 7
+[01:33:10.594] Browser LOG     Energy synced to DB: 8
+[01:35:10.593] Browser LOG     Energy synced to DB: 9
+[01:37:10.593] Browser LOG     Energy synced to DB: 10
+[01:39:10.594] Browser LOG     Energy synced to DB: 11
+[01:41:10.593] Browser LOG     Energy synced to DB: 12
+[01:43:10.594] Browser LOG     Energy synced to DB: 13
+[01:45:10.593] Browser LOG     Energy synced to DB: 14
+[01:47:10.593] Browser LOG     Energy synced to DB: 15
+[01:49:10.593] Browser LOG     Energy synced to DB: 16
+[01:51:10.593] Browser LOG     Energy synced to DB: 17
+[01:53:10.594] Browser LOG     Energy synced to DB: 18
+[01:55:10.593] Browser LOG     Energy synced to DB: 19
+[01:57:10.593] Browser LOG     Energy synced to DB: 20
+[01:57:56.939] Server  LOG      ✓ Compiled in 36ms
+[01:58:59.456] Browser LOG     Energy synced to DB: 21
+[01:59:14.269] Browser LOG     Energy system initialized: {"clampedEnergy":21,"lastRegenTime":"2025-11-14T19:55:22.353Z","maxEnergy":100,"rawEnergy":21}
+[01:59:15.384] Browser LOG     Energy used: 21 -> 0

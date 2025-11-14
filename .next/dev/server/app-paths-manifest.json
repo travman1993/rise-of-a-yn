@@ -1,9 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/api/assets/route": "app/api/assets/route.js",
   "/api/businesses/route": "app/api/businesses/route.js",
   "/api/offline/route": "app/api/offline/route.js",
   "/api/shop/route": "app/api/shop/route.js",
   "/dashboard/businesses/page": "app/dashboard/businesses/page.js",
+  "/dashboard/minigames/page": "app/dashboard/minigames/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/dashboard/shop/page": "app/dashboard/shop/page.js"
 }
