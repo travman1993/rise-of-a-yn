@@ -1,4 +1,15 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/boss/route": "app/api/boss/route.js",
+  "/api/crews/route": "app/api/crews/route.js",
   "/api/offline/route": "app/api/offline/route.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/api/shop/route": "app/api/shop/route.js",
+  "/dashboard/boss/page": "app/dashboard/boss/page.js",
+  "/dashboard/businesses/page": "app/dashboard/businesses/page.js",
+  "/dashboard/crews/page": "app/dashboard/crews/page.js",
+  "/dashboard/leaderboards/page": "app/dashboard/leaderboards/page.js",
+  "/dashboard/minigames/page": "app/dashboard/minigames/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/prestige/page": "app/dashboard/prestige/page.js",
+  "/dashboard/shop/page": "app/dashboard/shop/page.js"
 }
