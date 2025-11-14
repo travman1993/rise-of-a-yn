@@ -1,5 +1,6 @@
 // 📁 src/app/dashboard/shop/page.tsx
-// Flex Shop - Cosmetics & Accessories
+// Asset Shop - Buy Homes, Cars, Chains, Watches, Shoes, Dogs, Guns, Studios, Boats
+// Tier-gated: Must be Tier X to buy Tier X assets
 
 'use client';
 
@@ -7,147 +8,15 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
 import { formatCash } from '@/lib/gameLogic';
+import { ALL_ASSETS, ASSET_CATEGORIES, Asset } from '@/lib/assets';
 import styles from './shop.module.css';
-
-interface Cosmetic {
-  id: string;
-  item_id: string;
-  name: string;
-  category: 'chain' | 'watch' | 'sneaker' | 'pet' | 'decor';
-  power_bonus: number;
-  respect_bonus: number;
-  price: number;
-  image_url: string;
-}
-
-const SHOP_ITEMS: Cosmetic[] = [
-  // CHAINS
-  {
-    id: '1',
-    item_id: 'chain-gold',
-    name: 'Gold Chain',
-    category: 'chain',
-    power_bonus: 50,
-    respect_bonus: 10,
-    price: 25000,
-    image_url: '⛓️',
-  },
-  {
-    id: '2',
-    item_id: 'chain-diamond',
-    name: 'Diamond Chain',
-    category: 'chain',
-    power_bonus: 150,
-    respect_bonus: 30,
-    price: 250000,
-    image_url: '💎',
-  },
-  {
-    id: '3',
-    item_id: 'chain-platinum',
-    name: 'Platinum Chain',
-    category: 'chain',
-    power_bonus: 300,
-    respect_bonus: 50,
-    price: 1000000,
-    image_url: '✨',
-  },
-
-  // WATCHES
-  {
-    id: '4',
-    item_id: 'watch-rolex',
-    name: 'Rolex',
-    category: 'watch',
-    power_bonus: 100,
-    respect_bonus: 25,
-    price: 100000,
-    image_url: '⌚',
-  },
-  {
-    id: '5',
-    item_id: 'watch-ap',
-    name: 'Audemars Piguet',
-    category: 'watch',
-    power_bonus: 250,
-    respect_bonus: 60,
-    price: 500000,
-    image_url: '⏰',
-  },
-
-  // SNEAKERS
-  {
-    id: '6',
-    item_id: 'sneaker-jordan',
-    name: 'Jordan 1s',
-    category: 'sneaker',
-    power_bonus: 30,
-    respect_bonus: 15,
-    price: 10000,
-    image_url: '👟',
-  },
-  {
-    id: '7',
-    item_id: 'sneaker-yeezy',
-    name: 'Yeezy 350',
-    category: 'sneaker',
-    power_bonus: 80,
-    respect_bonus: 35,
-    price: 75000,
-    image_url: '👞',
-  },
-
-  // PETS
-  {
-    id: '8',
-    item_id: 'pet-dog',
-    name: 'Guard Dog',
-    category: 'pet',
-    power_bonus: 200,
-    respect_bonus: 40,
-    price: 200000,
-    image_url: '🐕',
-  },
-  {
-    id: '9',
-    item_id: 'pet-tiger',
-    name: 'Tiger',
-    category: 'pet',
-    power_bonus: 500,
-    respect_bonus: 100,
-    price: 2000000,
-    image_url: '🐯',
-  },
-
-  // DECOR
-  {
-    id: '10',
-    item_id: 'decor-neon',
-    name: 'Neon Sign',
-    category: 'decor',
-    power_bonus: 0,
-    respect_bonus: 50,
-    price: 50000,
-    image_url: '🔥',
-  },
-  {
-    id: '11',
-    item_id: 'decor-vault',
-    name: 'Vault Door',
-    category: 'decor',
-    power_bonus: 100,
-    respect_bonus: 75,
-    price: 500000,
-    image_url: '🚪',
-  },
-];
 
 export default function ShopPage() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
   const [stats, setStats] = useState<any>(null);
-  const [owned, setOwned] = useState<string[]>([]);
-  const [filter, setFilter] = useState<'all' | 'chain' | 'watch' | 'sneaker' | 'pet' | 'decor'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<'home' | 'car' | 'chain' | 'watch' | 'shoes' | 'dog' | 'gun' | 'studio' | 'boat'>('home');
+  const [ownedAssets, setOwnedAssets] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -157,128 +26,172 @@ export default function ShopPage() {
         setUser(currentUser);
         const playerStats = await getPlayerStats(currentUser.id);
         setStats(playerStats);
-        loadOwned(currentUser.id);
+        loadOwnedAssets(currentUser.id);
       }
     };
     load();
   }, []);
 
-  const loadOwned = async (userId: string) => {
+  const loadOwnedAssets = async (userId: string) => {
     try {
-      const res = await fetch(`/api/shop?userId=${userId}`);
+      const res = await fetch(`/api/assets?userId=${userId}`);
       const data = await res.json();
-      const ownedIds = data.cosmetics?.map((c: any) => c.item_id) || [];
-      setOwned(ownedIds);
+      if (data.success) {
+        setOwnedAssets(data.assets?.map((a: any) => a.asset_id) || []);
+      }
     } catch (error) {
-      console.error('Load owned error:', error);
+      console.error('Load owned assets error:', error);
     }
   };
 
-  const handleBuy = async (cosmetic: Cosmetic) => {
+  const handleBuyAsset = async (asset: Asset) => {
     if (!user || !stats) return;
 
-    if (stats.cash < cosmetic.price) {
+    // ✅ TIER GATING - Must own the tier to buy tier assets
+    if (stats.tier < asset.tier) {
+      alert(`You must be Tier ${asset.tier} to buy this asset!`);
+      return;
+    }
+
+    if (stats.cash < asset.price) {
       alert('Not enough cash!');
       return;
     }
 
     setLoading(true);
     try {
-      const res = await fetch('/api/shop', {
+      const res = await fetch('/api/assets', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          action: 'buy',
           userId: user.id,
-          cosmeticId: cosmetic.id,
+          assetData: asset,
         }),
       });
 
       const data = await res.json();
       if (data.success) {
-        alert(data.message);
-        setStats({ ...stats, cash: data.newCash });
-        setOwned([...owned, cosmetic.item_id]);
+        // Update stats with bonuses
+        setStats({
+          ...stats,
+          cash: data.newCash,
+          xp: data.newXP,
+          respect: data.newRespect,
+          energy: data.newEnergy,
+        });
+        setOwnedAssets([...ownedAssets, asset.id]);
+        alert(`✅ Bought ${asset.name}!\n+${asset.xp} XP\n+${asset.respect} Respect\n+${asset.power} Power\n+${asset.energy} Energy`);
       } else {
-        alert(data.error);
+        alert(data.error || 'Failed to buy asset');
       }
     } catch (error) {
-      console.error('Buy error:', error);
-      alert('Purchase failed');
+      console.error('Buy asset error:', error);
+      alert('Failed to buy asset');
     } finally {
       setLoading(false);
     }
   };
 
-  if (!stats) return <div>Loading...</div>;
+  if (!stats) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.container}>Loading...</div>
+      </div>
+    );
+  }
 
-  const filtered = filter === 'all' ? SHOP_ITEMS : SHOP_ITEMS.filter((c) => c.category === filter);
+  const currentAssets = ALL_ASSETS[selectedCategory] || [];
+  const isAllowedTier = (assetTier: number) => stats.tier >= assetTier;
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h1 className={styles.title}>🛍️ FLEX SHOP</h1>
+          <h1 className={styles.title}>🛍️ ASSET SHOP</h1>
           <button onClick={() => router.back()} className={styles.backBtn}>
             ← BACK
           </button>
         </div>
 
         <div className={styles.cashBar}>
-          <span className={styles.cashLabel}>💰 Available:</span>
+          <span className={styles.cashLabel}>💰 Cash:</span>
           <span className={styles.cashValue}>{formatCash(stats.cash)}</span>
+          <span className={styles.tierBadge}>Tier {stats.tier}</span>
         </div>
 
-        {/* FILTERS */}
-        <div className={styles.filters}>
-          {(['all', 'chain', 'watch', 'sneaker', 'pet', 'decor'] as const).map((cat) => (
+        {/* CATEGORY TABS */}
+        <div className={styles.categoryTabs}>
+          {ASSET_CATEGORIES.map((cat) => (
             <button
-              key={cat}
-              className={`${styles.filterBtn} ${filter === cat ? styles.active : ''}`}
-              onClick={() => setFilter(cat)}
+              key={cat.key}
+              className={`${styles.categoryTab} ${selectedCategory === cat.key ? styles.active : ''}`}
+              onClick={() => setSelectedCategory(cat.key as any)}
             >
-              {cat === 'all' && '🛍️ All'}
-              {cat === 'chain' && '⛓️ Chains'}
-              {cat === 'watch' && '⌚ Watches'}
-              {cat === 'sneaker' && '👟 Sneakers'}
-              {cat === 'pet' && '🐕 Pets'}
-              {cat === 'decor' && '🔥 Decor'}
+              {cat.icon} {cat.name}
             </button>
           ))}
         </div>
 
-        {/* SHOP GRID */}
-        <div className={styles.shopGrid}>
-          {filtered.map((item) => {
-            const isOwned = owned.includes(item.item_id);
+        {/* ASSETS GRID */}
+        <div className={styles.assetsGrid}>
+          {currentAssets.map((asset) => {
+            const isOwned = ownedAssets.includes(asset.id);
+            const canAfford = stats.cash >= asset.price;
+            const tierAllowed = isAllowedTier(asset.tier);
+            const canBuy = canAfford && tierAllowed && !isOwned;
+
             return (
-              <div key={item.id} className={`${styles.shopCard} ${isOwned ? styles.owned : ''}`}>
-                <div className={styles.itemIcon}>{item.image_url}</div>
+              <div
+                key={asset.id}
+                className={`${styles.assetCard} ${isOwned ? styles.owned : ''} ${!tierAllowed ? styles.locked : ''}`}
+              >
+                {/* TIER BADGE */}
+                <div className={styles.tierTag}>T{asset.tier}</div>
 
-                <h3 className={styles.itemName}>{item.name}</h3>
+                {/* ICON */}
+                <div className={styles.assetIcon}>{asset.icon}</div>
 
+                {/* NAME */}
+                <h3 className={styles.assetName}>{asset.name}</h3>
+
+                {/* PRICE */}
+                <div className={styles.price}>{formatCash(asset.price)}</div>
+
+                {/* STAT BONUSES */}
                 <div className={styles.bonuses}>
-                  {item.power_bonus > 0 && (
-                    <div className={styles.bonus}>
-                      <span className={styles.bonusLabel}>⚡ Power</span>
-                      <span className={styles.bonusValue}>+{item.power_bonus}</span>
-                    </div>
-                  )}
-                  {item.respect_bonus > 0 && (
-                    <div className={styles.bonus}>
-                      <span className={styles.bonusLabel}>🔥 Respect</span>
-                      <span className={styles.bonusValue}>+{item.respect_bonus}</span>
-                    </div>
-                  )}
+                  <span className={styles.bonusItem}>+{asset.xp} XP</span>
+                  <span className={styles.bonusItem}>+{asset.respect} 🔥</span>
+                  <span className={styles.bonusItem}>+{asset.power} PWR</span>
+                  <span className={styles.bonusItem}>+{asset.energy} ⚡</span>
                 </div>
 
-                <div className={styles.price}>{formatCash(item.price)}</div>
+                {/* STATUS */}
+                {isOwned && (
+                  <div className={styles.ownedStatus}>✓ OWNED</div>
+                )}
 
+                {!tierAllowed && (
+                  <div className={styles.lockedStatus}>🔒 T{asset.tier}</div>
+                )}
+
+                {!canAfford && tierAllowed && !isOwned && (
+                  <div className={styles.poorStatus}>💸 Poor</div>
+                )}
+
+                {/* BUY BUTTON */}
                 <button
-                  onClick={() => handleBuy(item)}
-                  disabled={isOwned || stats.cash < item.price || loading}
-                  className={styles.buyBtn}
+                  onClick={() => handleBuyAsset(asset)}
+                  disabled={!canBuy || loading}
+                  className={`${styles.buyBtn} ${isOwned ? styles.disabled : ''}`}
+                  title={
+                    isOwned ? 'Already owned' :
+                    !tierAllowed ? `Need Tier ${asset.tier}` :
+                    !canAfford ? 'Not enough cash' :
+                    'Buy'
+                  }
                 >
-                  {isOwned ? '✓ OWNED' : stats.cash < item.price ? 'POOR' : 'BUY'}
+                  {isOwned ? '✓' : !tierAllowed ? '🔒' : !canAfford ? '💸' : '💰'}
                 </button>
               </div>
             );
