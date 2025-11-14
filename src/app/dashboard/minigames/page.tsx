@@ -1,21 +1,23 @@
 // 📁 src/app/dashboard/minigames/page.tsx
-// Mini-Games Hub - Big Bank, Dice, Shootout
-// PvP games and NPC challenges with interactive shootout
+// FINAL FIXED Mini-Games Hub - Big Bank, Dice, Shootout
+// User picks moves, CPU randomized each round, proper gameplay flow
+// ALL SCOPE ISSUES FIXED ✅
 
 'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
+import { getCurrentUser, getPlayerStats, updatePlayerStats } from '@/lib/supabase';
 import { formatCash } from '@/lib/gameLogic';
 import styles from './minigames.module.css';
 
 type GameType = 'bigbank' | 'dice' | 'shootout' | null;
 type Move = 'pull' | 'duck' | 'reload';
+type GamePhase = 'select' | 'betting' | 'playing' | 'result';
 
 interface ShootoutRound {
   playerMove: Move;
-  bossMove: Move;
+  cpuMove: Move;
   result: 'win' | 'lose' | 'tie';
 }
 
@@ -24,17 +26,21 @@ export default function MiniGamesPage() {
   const [user, setUser] = useState<any>(null);
   const [stats, setStats] = useState<any>(null);
   const [activeGame, setActiveGame] = useState<GameType>(null);
-  const [betAmount, setBetAmount] = useState(0);
+  const [gamePhase, setGamePhase] = useState<GamePhase>('select');
+  const [betAmount, setBetAmount] = useState<string>('');
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
   // SHOOTOUT STATE
   const [shootoutRound, setShootoutRound] = useState(0);
   const [playerWins, setPlayerWins] = useState(0);
-  const [bossWins, setBossWins] = useState(0);
+  const [cpuWins, setCpuWins] = useState(0);
   const [shootoutRounds, setShootoutRounds] = useState<ShootoutRound[]>([]);
   const [playerBullets, setPlayerBullets] = useState(3);
-  const [bossBullets, setBossBullets] = useState(3);
+  const [cpuBullets, setCpuBullets] = useState(3);
+  const [lastRoundResult, setLastRoundResult] = useState<ShootoutRound | null>(null);
+  const [waitingForMove, setWaitingForMove] = useState(false);
+  const [currentBet, setCurrentBet] = useState(0); // ✅ Store the bet amount here
 
   useEffect(() => {
     const load = async () => {
@@ -48,130 +54,194 @@ export default function MiniGamesPage() {
     load();
   }, []);
 
-  // EVALUATE ROUND
-  function evaluateRound(playerMove: Move, bossMove: Move): 'win' | 'lose' | 'tie' {
-    if (playerMove === bossMove) return 'tie';
+  // GAME RULES - Evaluate round winner
+  const evaluateRound = (playerMove: Move, cpuMove: Move): 'win' | 'lose' | 'tie' => {
+    if (playerMove === cpuMove) return 'tie';
 
-    if (playerMove === 'pull' && bossMove === 'reload') return 'win';
-    if (playerMove === 'pull' && bossMove === 'duck') return 'lose';
+    // Pull beats Reload
+    if (playerMove === 'pull' && cpuMove === 'reload') return 'win';
+    if (playerMove === 'pull' && cpuMove === 'duck') return 'lose';
 
-    if (playerMove === 'reload' && bossMove === 'duck') return 'win';
-    if (playerMove === 'reload' && bossMove === 'pull') return 'lose';
+    // Reload beats Duck
+    if (playerMove === 'reload' && cpuMove === 'duck') return 'win';
+    if (playerMove === 'reload' && cpuMove === 'pull') return 'lose';
 
-    if (playerMove === 'duck' && bossMove === 'pull') return 'win';
-    if (playerMove === 'duck' && bossMove === 'reload') return 'lose';
+    // Duck beats Pull
+    if (playerMove === 'duck' && cpuMove === 'pull') return 'win';
+    if (playerMove === 'duck' && cpuMove === 'reload') return 'lose';
 
     return 'tie';
-  }
+  };
 
-  // GENERATE BOSS MOVE
-  function generateBossMove(): Move {
+  // CPU MAKES RANDOM MOVE - Fully randomized, not predictive
+  const generateCpuMove = (): Move => {
     const moves: Move[] = ['pull', 'duck', 'reload'];
-    if (Math.random() < 0.4) {
-      // Counter player strategy
-      return moves[Math.floor(Math.random() * moves.length)];
-    }
     return moves[Math.floor(Math.random() * moves.length)];
-  }
+  };
 
-  // HANDLE PLAYER MOVE IN SHOOTOUT
-  const handleShootoutMove = (playerMove: Move) => {
-    if (playerMove === 'pull' && playerBullets === 0) {
-      alert('No bullets! Use reload first.');
+  // START SHOOTOUT GAME
+  const handleStartShootout = () => {
+    const amount = Number(betAmount);
+
+    if (!amount || amount <= 0) {
+      alert('Enter a valid bet amount!');
       return;
     }
 
-    const bossMove = generateBossMove();
-    const roundResult = evaluateRound(playerMove, bossMove);
-
-    let newPlayerWins = playerWins;
-    let newBossWins = bossWins;
-    let newPlayerBullets = playerBullets;
-    let newBossBullets = bossBullets;
-
-    if (roundResult === 'win') {
-      newPlayerWins++;
-      if (playerMove === 'pull') newBossBullets--;
-    } else if (roundResult === 'lose') {
-      newBossWins++;
-      if (bossMove === 'pull') newPlayerBullets--;
+    if (amount > (stats?.cash || 0)) {
+      alert('Insufficient cash!');
+      return;
     }
 
+    // ✅ Store the bet amount for later use
+    setCurrentBet(amount);
+
+    // Reset state and start
+    setShootoutRound(1);
+    setPlayerWins(0);
+    setCpuWins(0);
+    setShootoutRounds([]);
+    setPlayerBullets(3);
+    setCpuBullets(3);
+    setLastRoundResult(null);
+    setResult(null);
+    setGamePhase('playing');
+    setWaitingForMove(true);
+  };
+
+  // PLAYER MAKES A MOVE
+  const handlePlayerMove = async (playerMove: Move) => {
+    if (waitingForMove === false) return;
+    if (playerMove === 'pull' && playerBullets === 0) {
+      alert('❌ No bullets! Use reload first.');
+      return;
+    }
+
+    setWaitingForMove(false);
+
+    // CPU makes their move (completely random)
+    const cpuMove = generateCpuMove();
+
+    // Evaluate round
+    const roundResult = evaluateRound(playerMove, cpuMove);
+
+    // Update bullets and wins
+    let newPlayerWins = playerWins;
+    let newCpuWins = cpuWins;
+    let newPlayerBullets = playerBullets;
+    let newCpuBullets = cpuBullets;
+
+    // Handle round result
+    if (roundResult === 'win') {
+      newPlayerWins++;
+      if (playerMove === 'pull') {
+        newCpuBullets--;
+      }
+    } else if (roundResult === 'lose') {
+      newCpuWins++;
+      if (cpuMove === 'pull') {
+        newPlayerBullets--;
+      }
+    }
+
+    // Handle reload moves
     if (playerMove === 'reload') newPlayerBullets = 3;
-    if (bossMove === 'reload') newBossBullets = 3;
+    if (cpuMove === 'reload') newCpuBullets = 3;
 
-    setShootoutRounds([
-      ...shootoutRounds,
-      { playerMove, bossMove, result: roundResult },
-    ]);
+    // Store round info
+    const roundInfo: ShootoutRound = { playerMove, cpuMove, result: roundResult };
 
+    // Update state
     setPlayerWins(newPlayerWins);
-    setBossWins(newBossWins);
+    setCpuWins(newCpuWins);
     setPlayerBullets(newPlayerBullets);
-    setBossBullets(newBossBullets);
-    setShootoutRound(shootoutRound + 1);
+    setCpuBullets(newCpuBullets);
+    setShootoutRounds([...shootoutRounds, roundInfo]);
+    setLastRoundResult(roundInfo);
 
-    // Check if match is over (best of 5 = first to 3)
-    if (newPlayerWins === 3 || newBossWins === 3) {
-      finishShootout(newPlayerWins, newBossWins);
+    // Check if match is over (first to 3 wins)
+    if (newPlayerWins === 3 || newCpuWins === 3) {
+      finishShootout(newPlayerWins, newCpuWins);
+    } else {
+      // Move to next round
+      setShootoutRound(shootoutRound + 1);
+      setWaitingForMove(true);
     }
   };
 
-  // FINISH SHOOTOUT
-  const finishShootout = async (finalPlayerWins: number, finalBossWins: number) => {
-    const matchWinner = finalPlayerWins > finalBossWins ? 'player' : 'boss';
+  // FINISH SHOOTOUT GAME
+  const finishShootout = async (finalPlayerWins: number, finalCpuWins: number) => {
+    const playerWon = finalPlayerWins > finalCpuWins;
     let cashReward = 0;
     let respectReward = 0;
 
-    if (matchWinner === 'player') {
-      cashReward = betAmount;
+    // ✅ Use currentBet - not betAmount which has scope issues
+    if (playerWon) {
+      cashReward = currentBet; // WIN: +bet
       respectReward = 3;
     } else {
-      cashReward = -betAmount;
+      cashReward = -currentBet; // LOSE: -bet
       respectReward = -2;
     }
 
-    setResult({
-      success: true,
-      matchWinner,
-      playerWins: finalPlayerWins,
-      bossWins: finalBossWins,
-      rounds: shootoutRounds,
-      cashReward,
-      respectReward,
-      totalCash: (stats?.cash || 0) + cashReward,
-    });
+    const newCash = Math.max(0, (stats?.cash || 0) + cashReward);
+    const newRespect = Math.max(0, (stats?.respect || 0) + respectReward);
 
-    // Update stats
-    const updated = await getPlayerStats(user.id);
-    setStats(updated);
-  };
+    // Update stats in database
+    try {
+      await updatePlayerStats(stats.user_id, {
+        cash: newCash,
+        respect: newRespect,
+        updated_at: new Date().toISOString(),
+      });
 
-  // START SHOOTOUT
-  const handleStartShootout = () => {
-    if (betAmount <= 0 || betAmount > (stats?.cash || 0)) {
-      alert('Invalid bet amount');
-      return;
+      // Get updated stats
+      const updated = await getPlayerStats(stats.user_id);
+      setStats(updated);
+    } catch (error) {
+      console.error('Error updating stats:', error);
     }
 
-    setShootoutRound(0);
-    setPlayerWins(0);
-    setBossWins(0);
-    setShootoutRounds([]);
-    setPlayerBullets(3);
-    setBossBullets(3);
-    setResult(null);
+    setResult({
+      won: playerWon,
+      playerWins: finalPlayerWins,
+      cpuWins: finalCpuWins,
+      cashReward,
+      respectReward,
+      newCash,
+      rounds: shootoutRounds,
+    });
+
+    setGamePhase('result');
   };
 
-  if (!stats)
+  // RESET AND GO BACK
+  const handleBackToGames = () => {
+    setActiveGame(null);
+    setGamePhase('select');
+    setBetAmount('');
+    setResult(null);
+    setShootoutRound(0);
+    setPlayerWins(0);
+    setCpuWins(0);
+    setShootoutRounds([]);
+    setPlayerBullets(3);
+    setCpuBullets(3);
+    setLastRoundResult(null);
+    setCurrentBet(0);
+  };
+
+  if (!stats) {
     return (
       <div className={styles.container}>
         <p>Loading...</p>
       </div>
     );
+  }
 
   return (
     <div className={styles.container}>
+      {/* HEADER */}
       <div className={styles.header}>
         <h1 className={styles.title}>🎲 STREET GAMES</h1>
         <button onClick={() => router.back()} className={styles.backBtn}>
@@ -180,130 +250,158 @@ export default function MiniGamesPage() {
       </div>
 
       {/* GAME SELECTOR */}
-      {!activeGame && !result && (
+      {gamePhase === 'select' && !activeGame && (
         <div className={styles.gameGrid}>
           {/* BIG BANK */}
           <div className={styles.gameCard}>
             <h3>💰 BIG BANK</h3>
             <p className={styles.desc}>Take from another player</p>
-            <p className={styles.locked}>🔒 Coming Soon (Requires PvP Matchmaking)</p>
+            <p className={styles.locked}>🔒 Coming Soon (Needs Players)</p>
           </div>
 
           {/* DICE */}
           <div className={styles.gameCard}>
             <h3>🎲 STREET DICE</h3>
             <p className={styles.desc}>Highest roll wins</p>
-            <p className={styles.locked}>🔒 Coming Soon (Requires Online Players)</p>
+            <p className={styles.locked}>🔒 Coming Soon (Needs Players)</p>
           </div>
 
           {/* SHOOTOUT */}
           <div className={`${styles.gameCard} ${styles.active}`}>
             <h3>🔫 SHOOTOUT</h3>
-            <p className={styles.desc}>Best of 5 vs Boss</p>
-            <button onClick={() => setActiveGame('shootout')} className={styles.playBtn}>
+            <p className={styles.desc}>Best of 5 vs CPU</p>
+            <button onClick={() => { setActiveGame('shootout'); setGamePhase('betting'); }} className={styles.playBtn}>
               PLAY NOW
             </button>
           </div>
         </div>
       )}
 
-      {/* SHOOTOUT SETUP */}
-      {activeGame === 'shootout' && !result && shootoutRound === 0 && (
+      {/* SHOOTOUT BETTING PHASE */}
+      {activeGame === 'shootout' && gamePhase === 'betting' && (
         <div className={styles.gamePanel}>
           <h2>🔫 SHOOTOUT - Best of 5</h2>
 
           <div className={styles.rules}>
-            <p>💡 <strong>Rules:</strong></p>
+            <p>💡 <strong>HOW TO PLAY:</strong></p>
             <ul>
-              <li>Pull beats Reload</li>
-              <li>Reload beats Duck</li>
-              <li>Duck beats Pull</li>
-              <li>Reload refills bullets (3 max)</li>
-              <li>Cannot Pull with 0 bullets</li>
-              <li>First to 3 wins takes match</li>
+              <li>🔫 <strong>Pull</strong> beats Reload (but needs bullets)</li>
+              <li>🦆 <strong>Duck</strong> beats Pull (defensive)</li>
+              <li>🔄 <strong>Reload</strong> beats Duck (refills 3 bullets)</li>
+              <li>You can't Pull with 0 bullets</li>
+              <li>First to 3 wins takes the match!</li>
+              <li><strong>YOUR STRATEGY:</strong> Pick your moves - CPU is fully random</li>
             </ul>
           </div>
 
           <div className={styles.betForm}>
-            <label>Bet Amount:</label>
+            <label>🎯 How much do you want to risk?</label>
             <input
               type="number"
               value={betAmount}
-              onChange={(e) => setBetAmount(Number(e.target.value))}
+              onChange={(e) => setBetAmount(e.target.value)}
               max={stats.cash}
-              placeholder="Enter amount"
+              placeholder="Enter bet amount"
+              className={styles.input}
             />
             <p className={styles.info}>Available: {formatCash(stats.cash)}</p>
           </div>
 
-          <button
-            onClick={handleStartShootout}
-            disabled={betAmount <= 0 || betAmount > stats.cash}
-            className={styles.startBtn}
-          >
-            START SHOOTOUT
-          </button>
+          <div className={styles.buttonGroup}>
+            <button
+              onClick={handleStartShootout}
+              disabled={!betAmount || Number(betAmount) <= 0 || Number(betAmount) > stats.cash}
+              className={styles.startBtn}
+            >
+              ✅ START GAME
+            </button>
+            <button onClick={handleBackToGames} className={styles.backGameBtn}>
+              ← BACK
+            </button>
+          </div>
         </div>
       )}
 
       {/* SHOOTOUT GAMEPLAY */}
-      {activeGame === 'shootout' && !result && shootoutRound > 0 && (
+      {activeGame === 'shootout' && gamePhase === 'playing' && shootoutRound > 0 && !result && (
         <div className={styles.gamePanel}>
           <h2>🔫 ROUND {shootoutRound} / 5</h2>
 
+          {/* SCOREBOARD */}
           <div className={styles.scoreBoard}>
             <div className={styles.playerScore}>
               <h3>YOU</h3>
               <p className={styles.wins}>{playerWins}</p>
-              <p className={styles.bullets}>💥 {playerBullets} bullets</p>
+              <p className={styles.bullets}>💥 Bullets: {playerBullets}</p>
             </div>
             <div className={styles.vs}>VS</div>
-            <div className={styles.bossScore}>
-              <h3>BOSS</h3>
-              <p className={styles.wins}>{bossWins}</p>
-              <p className={styles.bullets}>💥 {bossBullets} bullets</p>
+            <div className={styles.cpuScore}>
+              <h3>CPU</h3>
+              <p className={styles.wins}>{cpuWins}</p>
+              <p className={styles.bullets}>💥 Bullets: {cpuBullets}</p>
             </div>
           </div>
 
-          <p className={styles.roundInfo}>Choose your move:</p>
+          {/* MOVE BUTTONS */}
+          <p className={styles.roundInfo}>
+            {waitingForMove ? '👇 CHOOSE YOUR MOVE:' : '⏳ CPU is thinking...'}
+          </p>
 
           <div className={styles.moveButtons}>
             <button
-              onClick={() => handleShootoutMove('pull')}
-              disabled={playerBullets === 0}
-              className={styles.moveBtn}
+              onClick={() => handlePlayerMove('pull')}
+              disabled={playerBullets === 0 || !waitingForMove}
+              className={`${styles.moveBtn} ${playerBullets === 0 ? styles.disabled : ''}`}
+              title={playerBullets === 0 ? 'Need bullets! Use reload.' : 'Beats Reload'}
             >
               🔫 PULL
               <span className={styles.desc2}>Beats Reload</span>
+              {playerBullets === 0 && <span className={styles.warning}>NO AMMO</span>}
             </button>
-            <button onClick={() => handleShootoutMove('duck')} className={styles.moveBtn}>
+
+            <button
+              onClick={() => handlePlayerMove('duck')}
+              disabled={!waitingForMove}
+              className={styles.moveBtn}
+              title="Beats Pull"
+            >
               🦆 DUCK
               <span className={styles.desc2}>Beats Pull</span>
             </button>
-            <button onClick={() => handleShootoutMove('reload')} className={styles.moveBtn}>
+
+            <button
+              onClick={() => handlePlayerMove('reload')}
+              disabled={!waitingForMove}
+              className={styles.moveBtn}
+              title="Beats Duck, Refills bullets"
+            >
               🔄 RELOAD
               <span className={styles.desc2}>Beats Duck</span>
             </button>
           </div>
 
           {/* LAST ROUND RESULT */}
-          {shootoutRounds.length > 0 && (
+          {lastRoundResult && (
             <div className={styles.lastRound}>
               <h4>Last Round:</h4>
               <div className={styles.roundDisplay}>
-                <span className={styles.move}>{shootoutRounds[shootoutRounds.length - 1].playerMove.toUpperCase()}</span>
-                <span className={styles.vs2}>vs</span>
-                <span className={styles.move}>{shootoutRounds[shootoutRounds.length - 1].bossMove.toUpperCase()}</span>
+                <span className={styles.playerMove}>{lastRoundResult.playerMove.toUpperCase()}</span>
+                <span className={styles.vs2}>VS</span>
+                <span className={styles.cpuMove}>{lastRoundResult.cpuMove.toUpperCase()}</span>
                 <span
-                  className={
-                    shootoutRounds[shootoutRounds.length - 1].result === 'win'
+                  className={`${styles.result} ${
+                    lastRoundResult.result === 'win'
                       ? styles.win
-                      : shootoutRounds[shootoutRounds.length - 1].result === 'lose'
+                      : lastRoundResult.result === 'lose'
                       ? styles.lose
                       : styles.tie
-                  }
+                  }`}
                 >
-                  {shootoutRounds[shootoutRounds.length - 1].result.toUpperCase()}
+                  {lastRoundResult.result === 'win'
+                    ? '✅ WIN'
+                    : lastRoundResult.result === 'lose'
+                    ? '❌ LOSS'
+                    : '🤝 TIE'}
                 </span>
               </div>
             </div>
@@ -312,59 +410,75 @@ export default function MiniGamesPage() {
       )}
 
       {/* SHOOTOUT RESULT */}
-      {result && activeGame === 'shootout' && (
+      {activeGame === 'shootout' && gamePhase === 'result' && result && (
         <div className={styles.resultPanel}>
-          <h2>🔫 SHOOTOUT RESULT</h2>
+          <h2>🔫 GAME OVER</h2>
 
-          <div className={styles.matchResult}>
+          {/* FINAL SCORE */}
+          <div className={styles.finalScore}>
             <div className={styles.side}>
               <h3>YOU</h3>
-              <p className={styles.wins}>{result.playerWins}</p>
+              <p className={styles.bigWins}>{result.playerWins}</p>
             </div>
             <div className={styles.vs}>VS</div>
             <div className={styles.side}>
-              <h3>BOSS</h3>
-              <p className={styles.wins}>{result.bossWins}</p>
+              <h3>CPU</h3>
+              <p className={styles.bigWins}>{result.cpuWins}</p>
             </div>
           </div>
 
-          {result.matchWinner === 'player' ? (
-            <div className={styles.victory}>
-              <p className={styles.big}>🏆 YOU WIN!</p>
-              <p>+{formatCash(result.cashReward)}</p>
-              <p>+{result.respectReward} Respect</p>
+          {/* RESULT MESSAGE */}
+          {result.won ? (
+            <div className={`${styles.resultMessage} ${styles.victory}`}>
+              <h3>🎉 VICTORY! 🎉</h3>
+              <p>You dominated the shootout!</p>
+              <div className={styles.rewards}>
+                <div className={styles.reward}>
+                  <p className={styles.label}>💰 CASH WON</p>
+                  <p className={styles.value}>+{formatCash(result.cashReward)}</p>
+                </div>
+                <div className={styles.reward}>
+                  <p className={styles.label}>🔥 RESPECT</p>
+                  <p className={styles.value}>+{result.respectReward}</p>
+                </div>
+              </div>
             </div>
           ) : (
-            <div className={styles.defeat}>
-              <p className={styles.big}>💀 YOU LOST</p>
-              <p>{formatCash(result.cashReward)}</p>
-              <p>{result.respectReward} Respect</p>
+            <div className={`${styles.resultMessage} ${styles.defeat}`}>
+              <h3>❌ DEFEATED ❌</h3>
+              <p>The CPU was too strong this time.</p>
+              <div className={styles.rewards}>
+                <div className={styles.reward}>
+                  <p className={styles.label}>💰 CASH LOST</p>
+                  <p className={styles.value}>{formatCash(result.cashReward)}</p>
+                </div>
+                <div className={styles.reward}>
+                  <p className={styles.label}>🔥 RESPECT</p>
+                  <p className={styles.value}>{result.respectReward}</p>
+                </div>
+              </div>
             </div>
           )}
 
-          <div className={styles.rounds}>
-            {result.rounds.map((r: ShootoutRound, i: number) => (
-              <div key={i} className={styles.round}>
-                <span className={styles.move}>{r.playerMove.toUpperCase()}</span>
-                <span className={styles.vs2}>vs</span>
-                <span className={styles.move}>{r.bossMove.toUpperCase()}</span>
-                <span className={r.result === 'win' ? styles.win : r.result === 'lose' ? styles.lose : styles.tie}>
-                  {r.result.toUpperCase()}
-                </span>
-              </div>
-            ))}
+          {/* NEW TOTALS */}
+          <div className={styles.newTotals}>
+            <p>
+              <strong>New Cash:</strong> {formatCash(result.newCash)}
+            </p>
+            <p>
+              <strong>New Respect:</strong> {stats.respect}
+            </p>
           </div>
 
-          <button
-            onClick={() => {
-              setActiveGame(null);
-              setResult(null);
-              setBetAmount(0);
-            }}
-            className={styles.playAgainBtn}
-          >
-            PLAY AGAIN
-          </button>
+          {/* ACTION BUTTONS */}
+          <div className={styles.buttonGroup}>
+            <button onClick={handleBackToGames} className={styles.playAgainBtn}>
+              🎮 PLAY AGAIN
+            </button>
+            <button onClick={() => router.back()} className={styles.backGameBtn}>
+              ← BACK TO DASHBOARD
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -113,3 +113,29 @@ Import traces:
 [01:58:59.456] Browser LOG     Energy synced to DB: 21
 [01:59:14.269] Browser LOG     Energy system initialized: {"clampedEnergy":21,"lastRegenTime":"2025-11-14T19:55:22.353Z","maxEnergy":100,"rawEnergy":21}
 [01:59:15.384] Browser LOG     Energy used: 21 -> 0
+[02:01:12.313] Browser LOG     Energy system initialized: {"clampedEnergy":21,"lastRegenTime":"2025-11-14T19:55:22.353Z","maxEnergy":100,"rawEnergy":21}
+[02:01:13.444] Browser LOG     Energy used: 21 -> 0
+[02:03:12.626] Browser LOG     Energy synced to DB: 1
+[02:09:18.962] Server  LOG      ✓ Compiled in 53ms
+[02:09:38.165] Server  LOG      ✓ Compiled in 11ms
+[02:11:37.118] Browser ERROR   unhandledRejection: ReferenceError: Cannot access 'betAmount' before initialization
+[02:11:57.914] Browser LOG     Energy system initialized: {"clampedEnergy":1,"lastRegenTime":"2025-11-14T19:59:36.260Z","maxEnergy":100,"rawEnergy":1}
+[02:11:59.163] Browser LOG     Energy used: 1 -> 0
+[02:13:58.305] Browser LOG     Energy synced to DB: 1
+[02:15:03.482] Browser LOG     Energy system initialized: {"clampedEnergy":1,"lastRegenTime":"2025-11-14T20:10:21.868Z","maxEnergy":100,"rawEnergy":1}
+[02:15:04.611] Browser LOG     Energy used: 1 -> 0
+[02:15:10.441] Browser LOG     Energy system initialized: {"clampedEnergy":1,"lastRegenTime":"2025-11-14T20:10:21.868Z","maxEnergy":100,"rawEnergy":1}
+[02:15:11.546] Browser LOG     Energy used: 1 -> 0
+[02:20:30.290] Server  LOG      ✓ Compiled in 114ms
+[02:23:14.536] Server  LOG      ✓ Compiled in 43ms
+[02:24:13.859] Browser LOG     Energy system initialized: {"clampedEnergy":1,"lastRegenTime":"2025-11-14T20:10:21.868Z","maxEnergy":100,"rawEnergy":1}
+[02:24:15.075] Browser LOG     Energy used: 1 -> 0
+[02:24:46.830] Browser ERROR   Leaderboard error: {}
+[02:24:46.830] Browser ERROR   Leaderboard error: {}
+[02:32:43.185] Server  LOG      ✓ Compiled in 30ms
+[02:32:43.596] Browser LOG     [Leaderboard] Fetching wealth leaderboard...
+[02:32:43.596] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:32:43.596] Browser ERROR   [Leaderboard] Error loading: {}
+[02:32:44.594] Browser LOG     [Leaderboard] Fetching wealth leaderboard...
+[02:32:44.594] Browser ERROR   [Leaderboard] API error: 404 Not Found
+[02:32:44.594] Browser ERROR   [Leaderboard] Error loading: {}

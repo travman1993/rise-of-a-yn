@@ -5,6 +5,7 @@
   "/api/offline/route": "app/api/offline/route.js",
   "/api/shop/route": "app/api/shop/route.js",
   "/dashboard/businesses/page": "app/dashboard/businesses/page.js",
+  "/dashboard/leaderboards/page": "app/dashboard/leaderboards/page.js",
   "/dashboard/minigames/page": "app/dashboard/minigames/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/dashboard/shop/page": "app/dashboard/shop/page.js"

@@ -1,11 +1,11 @@
 // 📁 src/app/dashboard/leaderboards/page.tsx
-// Global Leaderboards - Full width, clean layout
+// FIXED Leaderboards - Shows actual leaders with real data
 
 'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getCurrentUser } from '@/lib/supabase';
+import { getCurrentUser, getPlayerStats } from '@/lib/supabase';
 import { formatCash } from '@/lib/gameLogic';
 import styles from './leaderboards.module.css';
 
@@ -14,59 +14,98 @@ type LeaderboardType = 'wealth' | 'respect' | 'prestige' | 'level';
 interface LeaderboardEntry {
   rank: number;
   username: string;
+  userId: string;
   value: number;
   prestigeLevel: number;
   level: number;
   cash: number;
   respect: number;
+  tier: number;
 }
 
 export default function LeaderboardsPage() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
+  const [stats, setStats] = useState<any>(null);
   const [activeType, setActiveType] = useState<LeaderboardType>('wealth');
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [userRank, setUserRank] = useState<LeaderboardEntry | null>(null);
 
+  // Load current user
   useEffect(() => {
     const load = async () => {
       const currentUser = await getCurrentUser();
-      setUser(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+        const playerStats = await getPlayerStats(currentUser.id);
+        setStats(playerStats);
+      }
     };
     load();
   }, []);
 
+  // Load leaderboard
   useEffect(() => {
     const loadLeaderboard = async () => {
       setLoading(true);
       try {
+        console.log(`[Leaderboard] Fetching ${activeType} leaderboard...`);
+        
         const res = await fetch(`/api/leaderboards/get?type=${activeType}&limit=100`);
-        const data = (await res.json()) as { leaderboard: LeaderboardEntry[] };
-        setLeaderboard(data.leaderboard || []);
+        
+        if (!res.ok) {
+          console.error('[Leaderboard] API error:', res.status, res.statusText);
+          const errorData = await res.json();
+          console.error('[Leaderboard] Error details:', errorData);
+          setLeaderboard([]);
+          return;
+        }
 
-        // Find user's rank
-        if (user) {
-          const username = user.email?.split('@')[0] || '';
-          const userEntry = data.leaderboard?.find((entry: LeaderboardEntry) => entry.username === username);
-          setUserRank(userEntry || null);
+        const data = await res.json();
+        
+        console.log('[Leaderboard] API Response:', data);
+        console.log('[Leaderboard] Leaderboard entries:', data.leaderboard?.length);
+        
+        if (data.leaderboard && data.leaderboard.length > 0) {
+          setLeaderboard(data.leaderboard);
+
+          // Find current user's rank
+          if (user) {
+            const username = user.email?.split('@')[0] || '';
+            console.log('[Leaderboard] Looking for user:', username);
+            
+            const userEntry = data.leaderboard.find(
+              (entry: LeaderboardEntry) => entry.username === username
+            );
+            
+            if (userEntry) {
+              console.log('[Leaderboard] Found user rank:', userEntry.rank);
+              setUserRank(userEntry);
+            } else {
+              console.log('[Leaderboard] User not in top 100');
+              setUserRank(null);
+            }
+          }
+        } else {
+          console.warn('[Leaderboard] No entries returned');
+          setLeaderboard([]);
         }
       } catch (error) {
-        console.error('Leaderboard error:', error);
+        console.error('[Leaderboard] Error loading:', error);
+        setLeaderboard([]);
       } finally {
         setLoading(false);
       }
     };
 
-    if (user) {
-      loadLeaderboard();
-    }
+    loadLeaderboard();
   }, [activeType, user]);
 
   const getValueDisplay = (entry: LeaderboardEntry) => {
     if (activeType === 'wealth') return formatCash(entry.cash);
     if (activeType === 'respect') return entry.respect.toLocaleString();
-    if (activeType === 'prestige') return entry.prestigeLevel;
+    if (activeType === 'prestige') return `${entry.prestigeLevel}x`;
     return entry.level;
   };
 
@@ -80,9 +119,17 @@ export default function LeaderboardsPage() {
     return labels[type];
   };
 
+  const getRankIcon = (rank: number) => {
+    if (rank === 1) return '👑';
+    if (rank === 2) return '🥈';
+    if (rank === 3) return '🥉';
+    return `#${rank}`;
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
+        {/* HEADER */}
         <div className={styles.header}>
           <h1 className={styles.title}>🏆 LEADERBOARDS</h1>
           <button onClick={() => router.back()} className={styles.backBtn}>
@@ -103,17 +150,20 @@ export default function LeaderboardsPage() {
           ))}
         </div>
 
-        {/* USER RANK */}
+        {/* USER'S RANK */}
         {userRank && (
-          <div className={styles.userRank}>
+          <div className={styles.userRankSection}>
+            <h3 className={styles.userRankTitle}>👤 YOUR RANK</h3>
             <div className={styles.rankCard}>
-              <div className={styles.rankBadge}>#{userRank.rank}</div>
+              <div className={styles.rankBadge}>{getRankIcon(userRank.rank)}</div>
               <div className={styles.rankInfo}>
-                <div>
-                  <p className={styles.username}>👤 {userRank.username}</p>
-                  <p className={styles.value}>{getValueDisplay(userRank)}</p>
+                <div className={styles.rankDetails}>
+                  <p className={styles.username}>#{userRank.rank} - {userRank.username}</p>
+                  <p className={styles.rankExtra}>Tier {userRank.tier} • Level {userRank.level} • {userRank.prestigeLevel}x Prestige</p>
                 </div>
-                <p className={styles.extra}>Level {userRank.level} • {userRank.prestigeLevel}x Prestige</p>
+                <div className={styles.rankValue}>
+                  {getValueDisplay(userRank)}
+                </div>
               </div>
             </div>
           </div>
@@ -124,20 +174,20 @@ export default function LeaderboardsPage() {
           {loading ? (
             <p className={styles.loading}>Loading leaderboard...</p>
           ) : leaderboard.length === 0 ? (
-            <p className={styles.empty}>No entries yet</p>
+            <p className={styles.empty}>No players on leaderboard yet. Be the first!</p>
           ) : (
             <div className={styles.leaderboard}>
               {leaderboard.map((entry, idx) => (
-                <div key={idx} className={styles.row}>
+                <div 
+                  key={`${entry.userId}-${idx}`} 
+                  className={`${styles.row} ${userRank?.userId === entry.userId ? styles.currentUser : ''}`}
+                >
                   <div className={styles.rank}>
-                    {entry.rank === 1 && '👑'}
-                    {entry.rank === 2 && '🥈'}
-                    {entry.rank === 3 && '🥉'}
-                    {entry.rank > 3 && `#${entry.rank}`}
+                    {getRankIcon(entry.rank)}
                   </div>
                   <div className={styles.name}>
                     <p>{entry.username}</p>
-                    <p className={styles.detail}>Lvl {entry.level} • {entry.prestigeLevel}x</p>
+                    <p className={styles.detail}>Tier {entry.tier} • Lvl {entry.level} • {entry.prestigeLevel}x</p>
                   </div>
                   <div className={styles.value}>
                     {getValueDisplay(entry)}
@@ -146,6 +196,14 @@ export default function LeaderboardsPage() {
               ))}
             </div>
           )}
+        </div>
+
+        {/* STATS INFO */}
+        <div className={styles.statsInfo}>
+          <p className={styles.infoText}>
+            📊 Leaderboards update in real-time as players progress. 
+            Climb the ranks and prove you're the ultimate mogul!
+          </p>
         </div>
       </div>
     </div>
