@@ -3,6 +3,8 @@
 
 'use client';
 
+import { useOfflineEarnings } from '@/lib/useOfflineEarnings';
+import { OfflineEarningsModal } from '@/components/OfflineEarningsModal';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -51,6 +53,16 @@ export default function Dashboard() {
   // USE ENERGY REGEN HOOK - Auto-updates energy every 60 seconds
   useEnergyRegen(user?.id, stats, (newEnergy) => {
     setStats((prev: any) => ({ ...prev, energy: newEnergy }));
+  });
+
+  const {
+    showEarningsModal,
+    earningsData,
+    loading: earningsLoading,
+    claimEarnings,
+    closeModal,
+  } = useOfflineEarnings(user?.id, (data) => {
+    setStats((prev: any) => ({ ...prev, cash: data.newCash }));
   });
 
   // ENERGY TIMER - Updates display every second
@@ -334,6 +346,17 @@ export default function Dashboard() {
           )}
         </main>
       </div>
+      {earningsData && (
+        <OfflineEarningsModal
+          show={showEarningsModal}
+          offlineIncome={earningsData.offlineIncome}
+          offlineMinutes={earningsData.offlineMinutes}
+          capped={earningsData.capped}
+          loading={earningsLoading}
+          onClaim={claimEarnings}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 }

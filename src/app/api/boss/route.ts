@@ -18,7 +18,7 @@ const BOSSES: Record<number, BossConfig> = {
   1: {
     tier: 1,
     name: 'Neighborhood OG',
-    powerRequired: 250,
+    powerRequired: 5000,
     cashReward: 5000,
     xpReward: 500,
     respectReward: 50,
@@ -26,7 +26,7 @@ const BOSSES: Record<number, BossConfig> = {
   2: {
     tier: 2,
     name: 'Block Captain',
-    powerRequired: 800,
+    powerRequired: 25000,
     cashReward: 25000,
     xpReward: 2000,
     respectReward: 150,
@@ -34,7 +34,7 @@ const BOSSES: Record<number, BossConfig> = {
   3: {
     tier: 3,
     name: 'City Controller',
-    powerRequired: 3000,
+    powerRequired: 100000,
     cashReward: 100000,
     xpReward: 8000,
     respectReward: 400,
@@ -42,7 +42,7 @@ const BOSSES: Record<number, BossConfig> = {
   4: {
     tier: 4,
     name: 'State Kingpin',
-    powerRequired: 10000,
+    powerRequired: 500000,
     cashReward: 500000,
     xpReward: 40000,
     respectReward: 1500,
@@ -50,7 +50,7 @@ const BOSSES: Record<number, BossConfig> = {
   5: {
     tier: 5,
     name: 'Global Don',
-    powerRequired: 50000,
+    powerRequired: 2000000,
     cashReward: 2000000,
     xpReward: 200000,
     respectReward: 5000,
